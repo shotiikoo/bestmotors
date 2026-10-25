@@ -1,0 +1,697 @@
+{
+ "settings": {
+  "hotline": "+995 415 00 00 00",
+  "email": "info@bestmotors.ge",
+  "facebook": "facebook.com/bestmotors.ge",
+  "hotlineHours": "ყოველდღე 09:00 – 21:00",
+  "deliveryFee": 5,
+  "freeDeliveryFrom": 150,
+  "deliveryNote": "მიწოდება ზუგდიდში იმავე დღეს, 14:00-მდე შეკვეთისას"
+ },
+ "branches": [
+  {
+   "id": "sab",
+   "city": "ზუგდიდი",
+   "name": "ცენტრალური",
+   "addr": "რუსთაველის ქ. 12",
+   "phone": "+995 415 00 00 01",
+   "wk": [
+    9,
+    20
+   ],
+   "sun": [
+    10,
+    17
+   ]
+  },
+  {
+   "id": "did",
+   "city": "ზუგდიდი",
+   "name": "გამსახურდიას გამზირი",
+   "addr": "ზ. გამსახურდიას გამზ. 85",
+   "phone": "+995 415 00 00 02",
+   "wk": [
+    9,
+    20
+   ],
+   "sun": [
+    10,
+    17
+   ]
+  },
+  {
+   "id": "bat",
+   "city": "ზუგდიდი",
+   "name": "კოსტავა",
+   "addr": "მ. კოსტავას ქ. 40",
+   "phone": "+995 415 00 00 03",
+   "wk": [
+    9,
+    19
+   ],
+   "sun": null
+  }
+ ],
+ "products": [
+  {
+   "id": 1,
+   "cat": "brakes",
+   "brand": "Brembo",
+   "name": "სამუხრუჭე ხუნდები, წინა",
+   "oem": "P 83 075",
+   "price": 145,
+   "old": 168,
+   "fits": [
+    "Toyota",
+    "Lexus"
+   ],
+   "stock": {
+    "sab": 8,
+    "did": 3,
+    "bat": 2
+   },
+   "specs": {
+    "ღერძი": "წინა",
+    "სიგანე": "131.2 მმ",
+    "სისქე": "17.5 მმ",
+    "ცვეთის სენსორი": "არა"
+   },
+   "pop": 98,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 2,
+   "cat": "brakes",
+   "brand": "Brembo",
+   "name": "სამუხრუჭე დისკი, ვენტილირებადი, წინა",
+   "oem": "09.A913.11",
+   "price": 210,
+   "fits": [
+    "Mercedes-Benz"
+   ],
+   "stock": {
+    "sab": 4,
+    "did": 2,
+    "bat": 0
+   },
+   "specs": {
+    "დიამეტრი": "322 მმ",
+    "სისქე": "32 მმ",
+    "ტიპი": "ვენტილირებადი",
+    "ხვრელები": "5"
+   },
+   "pop": 80,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 3,
+   "cat": "brakes",
+   "brand": "Bosch",
+   "name": "სამუხრუჭე ხუნდები, უკანა",
+   "oem": "0 986 494 294",
+   "price": 98,
+   "fits": [
+    "BMW"
+   ],
+   "stock": {
+    "sab": 5,
+    "did": 5,
+    "bat": 3
+   },
+   "specs": {
+    "ღერძი": "უკანა",
+    "სიგანე": "123.1 მმ",
+    "ცვეთის სენსორი": "მომზადებულია"
+   },
+   "pop": 74,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 4,
+   "cat": "brakes",
+   "brand": "TRW",
+   "name": "სამუხრუჭე დისკი, წინა (2 ც.)",
+   "oem": "DF6119",
+   "price": 232,
+   "old": 259,
+   "fits": [
+    "Hyundai",
+    "Kia"
+   ],
+   "stock": {
+    "sab": 2,
+    "did": 0,
+    "bat": 1
+   },
+   "specs": {
+    "დიამეტრი": "300 მმ",
+    "სისქე": "28 მმ",
+    "რაოდენობა": "2 ც."
+   },
+   "pop": 66,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 5,
+   "cat": "brakes",
+   "brand": "ATE",
+   "name": "სამუხრუჭე სითხე SL.6 DOT 4, 1 ლ",
+   "oem": "03.9901-6402.2",
+   "price": 32,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 30,
+    "did": 24,
+    "bat": 12
+   },
+   "specs": {
+    "სტანდარტი": "DOT 4 Class 6",
+    "მოცულობა": "1 ლ",
+    "დუღილის ტ°": "265 °C"
+   },
+   "pop": 70,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 6,
+   "cat": "filters",
+   "brand": "Mann-Filter",
+   "name": "ზეთის ფილტრი",
+   "oem": "W 712/75",
+   "price": 24,
+   "fits": [
+    "Volkswagen"
+   ],
+   "stock": {
+    "sab": 40,
+    "did": 22,
+    "bat": 15
+   },
+   "specs": {
+    "ტიპი": "ხრახნიანი",
+    "სიმაღლე": "79 მმ",
+    "ძაფი": "3/4-16 UNF"
+   },
+   "pop": 92,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 7,
+   "cat": "filters",
+   "brand": "Mann-Filter",
+   "name": "ჰაერის ფილტრი",
+   "oem": "C 30 005",
+   "price": 46,
+   "fits": [
+    "Toyota",
+    "Lexus"
+   ],
+   "stock": {
+    "sab": 12,
+    "did": 9,
+    "bat": 4
+   },
+   "specs": {
+    "სიგრძე": "305 მმ",
+    "სიგანე": "182 მმ",
+    "სიმაღლე": "58 მმ"
+   },
+   "pop": 88,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 8,
+   "cat": "filters",
+   "brand": "Bosch",
+   "name": "სალონის ფილტრი, ნახშირის",
+   "oem": "1 987 432 097",
+   "price": 52,
+   "fits": [
+    "Mercedes-Benz",
+    "BMW"
+   ],
+   "stock": {
+    "sab": 6,
+    "did": 4,
+    "bat": 0
+   },
+   "specs": {
+    "ტიპი": "აქტიური ნახშირი",
+    "სიგრძე": "282 მმ"
+   },
+   "pop": 60,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 9,
+   "cat": "filters",
+   "brand": "Mahle",
+   "name": "საწვავის ფილტრი (დიზელი)",
+   "oem": "KL 85",
+   "price": 58,
+   "fits": [
+    "Volkswagen",
+    "Ford"
+   ],
+   "stock": {
+    "sab": 3,
+    "did": 2,
+    "bat": 0
+   },
+   "specs": {
+    "საწვავი": "დიზელი",
+    "დიამეტრი": "85 მმ"
+   },
+   "pop": 41,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 10,
+   "cat": "oil",
+   "brand": "Castrol",
+   "name": "ძრავის ზეთი EDGE 5W-30 LL, 4 ლ",
+   "oem": "15669A",
+   "price": 135,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 25,
+    "did": 18,
+    "bat": 10
+   },
+   "specs": {
+    "სიბლანტე": "5W-30",
+    "მოცულობა": "4 ლ",
+    "დაშვებები": "VW 504.00/507.00, BMW LL-04"
+   },
+   "pop": 95,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 11,
+   "cat": "oil",
+   "brand": "Mobil 1",
+   "name": "ძრავის ზეთი ESP 5W-30, 4 ლ",
+   "oem": "154297",
+   "price": 149,
+   "old": 165,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 14,
+    "did": 11,
+    "bat": 6
+   },
+   "specs": {
+    "სიბლანტე": "5W-30",
+    "მოცულობა": "4 ლ",
+    "დაშვებები": "MB 229.51, VW 504/507"
+   },
+   "pop": 86,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 12,
+   "cat": "oil",
+   "brand": "Liqui Moly",
+   "name": "ძრავის ზეთი Top Tec 4200 5W-30, 5 ლ",
+   "oem": "3707",
+   "price": 168,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 9,
+    "did": 7,
+    "bat": 4
+   },
+   "specs": {
+    "სიბლანტე": "5W-30",
+    "მოცულობა": "5 ლ",
+    "დაშვებები": "VW 504/507, Porsche C30"
+   },
+   "pop": 72,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 13,
+   "cat": "oil",
+   "brand": "Febi",
+   "name": "ანტიფრიზი G12+ კონცენტრატი, 1.5 ლ",
+   "oem": "22272",
+   "price": 29,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 20,
+    "did": 16,
+    "bat": 9
+   },
+   "specs": {
+    "ტიპი": "G12+",
+    "ფერი": "ვარდისფერი",
+    "მოცულობა": "1.5 ლ"
+   },
+   "pop": 58,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 14,
+   "cat": "ignition",
+   "brand": "NGK",
+   "name": "ანთების სანთელი Laser Iridium",
+   "oem": "ILKAR7B11",
+   "price": 38,
+   "fits": [
+    "Toyota",
+    "Lexus",
+    "Subaru"
+   ],
+   "stock": {
+    "sab": 48,
+    "did": 32,
+    "bat": 16
+   },
+   "specs": {
+    "ელექტროდი": "ირიდიუმი",
+    "ძაფი": "M12",
+    "გასაღები": "14 მმ",
+    "რესურსი": "100 000 კმ"
+   },
+   "pop": 90,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 15,
+   "cat": "ignition",
+   "brand": "Denso",
+   "name": "ანთების სანთელი Iridium TT",
+   "oem": "IK20TT",
+   "price": 34,
+   "fits": [
+    "Honda",
+    "Nissan",
+    "Hyundai",
+    "Kia"
+   ],
+   "stock": {
+    "sab": 36,
+    "did": 20,
+    "bat": 10
+   },
+   "specs": {
+    "ელექტროდი": "ირიდიუმი",
+    "ძაფი": "M14",
+    "გასაღები": "16 მმ"
+   },
+   "pop": 68,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 16,
+   "cat": "ignition",
+   "brand": "Bosch",
+   "name": "ანთების კოჭა",
+   "oem": "0 221 504 470",
+   "price": 115,
+   "fits": [
+    "Volkswagen"
+   ],
+   "stock": {
+    "sab": 4,
+    "did": 1,
+    "bat": 0
+   },
+   "specs": {
+    "კონტაქტები": "4",
+    "ძაბვა": "12 V"
+   },
+   "pop": 49,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 17,
+   "cat": "battery",
+   "brand": "Varta",
+   "name": "აკუმულატორი Blue Dynamic E11, 74 Ah",
+   "oem": "574 012 068",
+   "price": 345,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 6,
+    "did": 4,
+    "bat": 3
+   },
+   "specs": {
+    "ტევადობა": "74 Ah",
+    "გაშვების დენი": "680 A",
+    "პოლარობა": "R+",
+    "ზომა": "278×175×190 მმ"
+   },
+   "pop": 84,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 18,
+   "cat": "battery",
+   "brand": "Bosch",
+   "name": "აკუმულატორი S5 008, 77 Ah AGM-ready",
+   "oem": "0 092 S50 080",
+   "price": 395,
+   "old": 430,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 3,
+    "did": 2,
+    "bat": 1
+   },
+   "specs": {
+    "ტევადობა": "77 Ah",
+    "გაშვების დენი": "780 A",
+    "პოლარობა": "R+"
+   },
+   "pop": 77,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 19,
+   "cat": "suspension",
+   "brand": "Sachs",
+   "name": "ამორტიზატორი, წინა მარცხენა",
+   "oem": "313 418",
+   "price": 186,
+   "fits": [
+    "Toyota"
+   ],
+   "stock": {
+    "sab": 2,
+    "did": 2,
+    "bat": 1
+   },
+   "specs": {
+    "ღერძი": "წინა",
+    "მხარე": "მარცხენა",
+    "ტიპი": "გაზის"
+   },
+   "pop": 63,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 20,
+   "cat": "suspension",
+   "brand": "Lemförder",
+   "name": "სტაბილიზატორის ბიძგი",
+   "oem": "35124 01",
+   "price": 54,
+   "fits": [
+    "BMW"
+   ],
+   "stock": {
+    "sab": 10,
+    "did": 6,
+    "bat": 2
+   },
+   "specs": {
+    "ღერძი": "წინა",
+    "სიგრძე": "285 მმ"
+   },
+   "pop": 55,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 21,
+   "cat": "suspension",
+   "brand": "Febi",
+   "name": "საყრდენი შარნირი",
+   "oem": "41806",
+   "price": 62,
+   "fits": [
+    "Hyundai",
+    "Kia"
+   ],
+   "stock": {
+    "sab": 5,
+    "did": 0,
+    "bat": 2
+   },
+   "specs": {
+    "ღერძი": "წინა",
+    "კონუსი": "18 მმ"
+   },
+   "pop": 47,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 22,
+   "cat": "lighting",
+   "brand": "Osram",
+   "name": "ნათურა H7 Night Breaker, 2 ც.",
+   "oem": "64210NL-HCB",
+   "price": 72,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 22,
+    "did": 14,
+    "bat": 8
+   },
+   "specs": {
+    "ცოკოლი": "PX26d",
+    "სიმძლავრე": "55 W",
+    "სიკაშკაშე": "+200%"
+   },
+   "pop": 81,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 23,
+   "cat": "lighting",
+   "brand": "Philips",
+   "name": "ქსენონის ნათურა D1S",
+   "oem": "85415XV2C1",
+   "price": 165,
+   "fits": [
+    "*"
+   ],
+   "stock": {
+    "sab": 4,
+    "did": 3,
+    "bat": 0
+   },
+   "specs": {
+    "ცოკოლი": "PK32d-2",
+    "ტემპერატურა": "4800 K"
+   },
+   "pop": 52,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 24,
+   "cat": "engine",
+   "brand": "Gates",
+   "name": "გამანაწილებელი ღვედის კომპლექტი",
+   "oem": "K015607XS",
+   "price": 289,
+   "old": 320,
+   "fits": [
+    "Volkswagen"
+   ],
+   "stock": {
+    "sab": 3,
+    "did": 1,
+    "bat": 1
+   },
+   "specs": {
+    "კომპლექტში": "ღვედი, გორგოლაჭები",
+    "კბილები": "141"
+   },
+   "pop": 59,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 25,
+   "cat": "engine",
+   "brand": "Contitech",
+   "name": "პოლიკლინური ღვედი",
+   "oem": "6PK1873",
+   "price": 64,
+   "fits": [
+    "Toyota",
+    "Lexus"
+   ],
+   "stock": {
+    "sab": 9,
+    "did": 5,
+    "bat": 3
+   },
+   "specs": {
+    "ღარები": "6",
+    "სიგრძე": "1873 მმ"
+   },
+   "pop": 50,
+   "active": true,
+   "image": ""
+  },
+  {
+   "id": 26,
+   "cat": "engine",
+   "brand": "Aisin",
+   "name": "წყლის ტუმბო (პომპა)",
+   "oem": "WPT-190",
+   "price": 178,
+   "fits": [
+    "Toyota",
+    "Lexus"
+   ],
+   "stock": {
+    "sab": 2,
+    "did": 0,
+    "bat": 0
+   },
+   "specs": {
+    "ამძრავი": "ღვედით",
+    "შუასადები": "კომპლექტშია"
+   },
+   "pop": 44,
+   "active": true,
+   "image": ""
+  }
+ ],
+ "orders": [],
+ "requests": [],
+ "nextId": 27
+}

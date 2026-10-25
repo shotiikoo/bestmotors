@@ -1,0 +1,14 @@
+{
+  "name": "best-motors",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Best Motors auto parts store with admin panel",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {}
+}

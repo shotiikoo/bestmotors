@@ -1,0 +1,1056 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Best Motors — ავტონაწილების მაღაზია ზუგდიდში. ნაწილები ავტომობილის მარკით და VIN კოდით, მიწოდება და გატანა ფილიალიდან.">
+<title>Best Motors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wdth,wght@62.5..100,400..900&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+html,body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+/* Layout: workshop counter — sticky header, vehicle picker hero, filter rail + parts grid, branch cards, contact */
+:root{
+  --bg:#1a1c1f;
+  --surface:#23262a;
+  --surface-2:#2c3035;
+  --line:#3a3f46;
+  --fg:#ebe8e2;
+  --muted:#9ba1a8;
+  --accent:#d9232b;
+  --accent-2:#ff5a52;
+  --accent-ink:#ffffff;
+  --ok:#5bbf86;
+  --low:#e4b64a;
+  --out:#f0726a;
+  --display:"Noto Sans Georgian",system-ui,sans-serif;
+  --body:"Noto Sans Georgian",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --r:6px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--surface)}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-stretch:75%;text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:clamp(26px,3.4vw,38px);font-weight:800}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:2px}
+.mono{font-family:var(--mono);font-size:.82em;letter-spacing:.02em}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:var(--r);padding:11px 18px;font-weight:700;cursor:pointer;background:var(--accent);color:var(--accent-ink);text-decoration:none;transition:filter .15s,transform .15s}
+.btn:hover{filter:brightness(1.12)}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--muted)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--surface);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:18px;padding-block:12px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-mark{width:38px;height:38px;border-radius:5px;background:var(--accent);display:grid;place-items:center;color:var(--accent-ink)}
+.logo-text{font-family:var(--display);font-stretch:62.5%;font-weight:900;font-size:24px;letter-spacing:.02em;line-height:1}
+.logo-text span{color:var(--accent-2)}
+nav.main{display:flex;gap:4px;margin-left:8px}
+nav.main a{text-decoration:none;padding:8px 12px;border-radius:var(--r);color:var(--muted);font-weight:600;font-size:14px}
+nav.main a:hover{color:var(--fg);background:var(--surface-2)}
+.hsearch{flex:1;min-width:0;position:relative}
+.hsearch input{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px 10px 38px}
+.hsearch svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.cartbtn{position:relative;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:9px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;flex-shrink:0}
+.cartbtn .count{background:var(--accent);color:var(--accent-ink);border-radius:20px;min-width:22px;height:22px;display:grid;place-items:center;font-size:12px;padding:0 6px;font-variant-numeric:tabular-nums}
+.menubtn{display:none;background:none;border:1px solid var(--line);border-radius:var(--r);padding:8px;cursor:pointer}
+@media (max-width:980px){nav.main{display:none}nav.main.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--surface);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px))}.menubtn{display:block}}
+@media (max-width:640px){.hbar{flex-wrap:wrap;gap:10px}.hsearch{order:5;flex-basis:100%}.cartbtn .lbl{display:none}.logo-text{font-size:21px}}
+.topstrip{background:var(--bg);border-bottom:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.topstrip .wrap{display:flex;gap:20px;padding-block:6px;flex-wrap:wrap}
+.topstrip b{color:var(--fg);font-weight:600}
+
+/* hero */
+.hero{padding-block:48px 40px;border-bottom:1px solid var(--line);background:
+  repeating-linear-gradient(135deg,transparent 0 22px,rgba(255,255,255,.018) 22px 23px),var(--bg)}
+.hero-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center}
+@media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:28px}}
+.hero h1{font-size:clamp(38px,6vw,72px);font-weight:900;font-stretch:62.5%;letter-spacing:-.005em;text-transform:uppercase}
+.hero h1 em{font-style:normal;color:var(--accent-2)}
+.hero p.lead{color:var(--muted);font-size:17px;max-width:52ch;margin:16px 0 22px}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.hero-stats div{display:flex;flex-direction:column}
+.hero-stats b{font-family:var(--display);font-stretch:70%;font-size:30px;font-weight:800;font-variant-numeric:tabular-nums}
+.hero-stats span{font-size:13px;color:var(--muted)}
+.picker{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:22px;box-shadow:0 20px 50px -24px rgba(0,0,0,.7)}
+.picker h3{font-size:22px;font-weight:800;margin-bottom:4px}
+.picker .sub{color:var(--muted);font-size:13.5px;margin:0 0 16px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.field select,.field input,.field textarea{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;width:100%}
+.picker-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px}
+@media (max-width:480px){.picker-grid{grid-template-columns:1fr 1fr}.picker-grid .field:last-child{grid-column:1/-1}}
+.vin{display:flex;gap:8px;align-items:center;margin-top:14px;padding-top:14px;border-top:1px dashed var(--line);font-size:13px;color:var(--muted)}
+.vin-box{margin-top:12px;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;font-size:13.5px}
+.vin-res{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:0}
+.vin-res dt{color:var(--muted)}
+.vin-res dd{margin:0;font-weight:600}
+.vin-res .muted,.vin-res dd .muted{color:var(--muted);font-weight:400}
+.field select.need{border-color:var(--low);box-shadow:0 0 0 2px rgba(228,182,74,.25)}
+.vin-err{margin:0;color:var(--out)}
+.vin input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;font-family:var(--mono);font-size:13px;text-transform:uppercase}
+
+/* categories */
+.cats{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;padding-block:28px}
+@media (max-width:1000px){.cats{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:480px){.cats{grid-template-columns:repeat(2,1fr)}}
+.cat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;text-align:center;font-size:13px;font-weight:600;transition:border-color .15s,background .15s}
+.cat svg{color:var(--accent-2)}
+.cat:hover{border-color:var(--muted)}
+.cat[aria-pressed="true"]{border-color:var(--accent);background:var(--surface-2)}
+.cat small{color:var(--muted);font-weight:400;font-size:11.5px}
+
+/* catalog */
+section.block{padding-block:40px}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sec-head p{color:var(--muted);margin:6px 0 0}
+.catalog{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start}
+@media (max-width:900px){.catalog{grid-template-columns:1fr}}
+.rail{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:20px;position:sticky;top:calc(84px + env(safe-area-inset-top,0px))}
+@media (max-width:900px){.rail{position:static}.rail[data-collapsed="true"] .rail-body{display:none}}
+.rail-toggle{display:none}
+@media (max-width:900px){.rail-toggle{display:flex;justify-content:space-between;width:100%;background:none;border:0;padding:0;font-weight:700;cursor:pointer}}
+.rail-body{display:flex;flex-direction:column;gap:20px}
+.rail h4{margin:0 0 10px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.checks{display:flex;flex-direction:column;gap:7px;max-height:220px;overflow:auto}
+.checks label{display:flex;align-items:center;gap:9px;font-size:14px;cursor:pointer}
+.checks input{accent-color:var(--accent);width:16px;height:16px}
+.checks .n{margin-left:auto;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.price-row{display:flex;gap:8px;align-items:center}
+.price-row input{width:100%;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px;font-variant-numeric:tabular-nums}
+.toolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.toolbar .found{color:var(--muted);font-size:14px;margin-right:auto}
+.toolbar select{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface-2);border:1px solid var(--line);border-radius:20px;padding:4px 6px 4px 12px;font-size:13px}
+.chip button{background:none;border:0;cursor:pointer;color:var(--muted);padding:0 4px;font-size:16px;line-height:1}
+.chip button:hover{color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);display:flex;flex-direction:column;overflow:hidden;transition:border-color .15s,transform .15s}
+.card:hover{border-color:#525861;transform:translateY(-2px)}
+.card .pic{aspect-ratio:4/3;max-width:100%;background:radial-gradient(circle at 50% 45%,var(--surface-2),var(--surface) 70%);display:grid;place-items:center;color:var(--muted);position:relative;cursor:pointer;border:0;width:100%;padding:0}
+.card .pic img{width:100%;height:100%;object-fit:contain;background:#fff}
+.mpic img{width:100%;height:100%;max-height:360px;object-fit:contain;background:#fff}
+.line .th img{width:52px;height:52px;object-fit:contain;border-radius:var(--r);background:#fff}
+.card .pic svg{width:44%;height:auto;color:#c9c6bf}
+.badge{position:absolute;top:10px;left:10px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:800;padding:3px 8px;border-radius:4px;letter-spacing:.04em}
+.card .body{padding:14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.card .brand{font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.card h3{font-family:var(--body);font-stretch:100%;font-size:15px;font-weight:600;line-height:1.35;cursor:pointer}
+.card h3:hover{color:var(--accent-2)}
+.fits{font-size:12.5px;color:var(--muted)}
+.stock{font-size:12.5px;display:flex;align-items:center;gap:6px}
+.dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot.ok{background:var(--ok)}.dot.low{background:var(--low)}.dot.out{background:var(--out)}
+.card .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:8px}
+.price{font-family:var(--display);font-stretch:75%;font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.price small{font-size:.6em;font-weight:600;color:var(--muted)}
+.price s{display:block;font-size:13px;color:var(--muted);font-weight:500;font-stretch:100%}
+.add{padding:9px 12px;font-size:13.5px}
+.empty{grid-column:1/-1;text-align:center;padding:48px 16px;border:1px dashed var(--line);border-radius:var(--r);color:var(--muted)}
+.more{display:flex;justify-content:center;margin-top:20px}
+
+/* services */
+.services{background:var(--surface);border-block:1px solid var(--line)}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding-block:32px}
+@media (max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.svc-grid{grid-template-columns:1fr}}
+.svc{display:flex;gap:14px}
+.svc svg{color:var(--accent-2);flex-shrink:0}
+.svc b{display:block;margin-bottom:2px}
+.svc span{color:var(--muted);font-size:13.5px}
+
+/* price list */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;min-width:560px;font-size:14px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--line)}
+th{background:var(--surface);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--surface)}
+
+/* branches */
+.branches{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media (max-width:820px){.branches{grid-template-columns:1fr}}
+.branch{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:10px}
+.branch .city{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.branch h3{font-size:22px;font-weight:800}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600}
+.branch dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:13.5px}
+.branch dt{color:var(--muted)}
+.branch dd{margin:0}
+.branch .acts{display:flex;gap:8px;margin-top:auto;flex-wrap:wrap}
+.branch .acts .btn{padding:8px 12px;font-size:13px}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:28px}
+@media (max-width:860px){.contact-grid{grid-template-columns:1fr}}
+.cinfo{display:flex;flex-direction:column;gap:14px}
+.cline{display:flex;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.cline svg{color:var(--accent-2);flex-shrink:0;margin-top:2px}
+.cline small{display:block;color:var(--muted);font-size:12px}
+.cline .val{font-weight:700;user-select:all}
+.copy{margin-left:auto;background:none;border:1px solid var(--line);border-radius:4px;padding:4px 8px;font-size:12px;cursor:pointer;color:var(--muted);flex-shrink:0}
+.copy:hover{color:var(--fg)}
+form.cform{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form.cform .full{grid-column:1/-1}
+@media (max-width:520px){form.cform{grid-template-columns:1fr}}
+.note{font-size:13px;color:var(--muted)}
+.okmsg{background:rgba(91,191,134,.12);border:1px solid var(--ok);border-radius:var(--r);padding:12px 14px;font-size:14px}
+
+footer{border-top:1px solid var(--line);margin-top:40px;padding-block:28px;color:var(--muted);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* drawer + modal */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);background:var(--surface);border-left:1px solid var(--line);z-index:90;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-right:env(safe-area-inset-right,0px)}
+.dhead{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--line)}
+.dhead h3{font-size:22px;font-weight:800}
+.x{background:none;border:1px solid var(--line);border-radius:var(--r);width:36px;height:36px;cursor:pointer;font-size:18px;line-height:1}
+.dbody{flex:1;overflow:auto;padding:14px 18px;display:flex;flex-direction:column;gap:12px}
+.line{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.line .th{width:52px;height:52px;background:var(--surface-2);border-radius:var(--r);display:grid;place-items:center;color:#c9c6bf}
+.line .th svg{width:30px;height:30px}
+.line .nm{font-size:13.5px;font-weight:600;line-height:1.3}
+.line .nm small{display:block;color:var(--muted);font-weight:400}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:var(--r);margin-top:6px;width:max-content}
+.qty button{background:none;border:0;width:28px;height:28px;cursor:pointer;font-size:16px}
+.qty span{min-width:24px;text-align:center;font-variant-numeric:tabular-nums;font-size:13px}
+.lp{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lp button{display:block;margin-left:auto;margin-top:6px;background:none;border:0;color:var(--muted);font-size:12px;cursor:pointer;text-decoration:underline}
+.dfoot{border-top:1px solid var(--line);padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.sum{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.sum.total{color:var(--fg);font-size:18px;font-weight:800}
+.seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.seg button{background:none;border:0;padding:9px;cursor:pointer;font-weight:600;font-size:13.5px;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.modal{position:fixed;z-index:90;left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,calc(100% - 24px));max-height:calc(100% - 40px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.mgrid{display:grid;grid-template-columns:1fr 1.2fr}
+@media (max-width:640px){.mgrid{grid-template-columns:1fr}}
+.mpic{background:radial-gradient(circle at 50% 45%,var(--surface-2),var(--bg) 75%);display:grid;place-items:center;min-height:240px;color:#c9c6bf}
+.mpic svg{width:50%;height:auto}
+.minfo{padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.minfo h3{font-family:var(--body);font-stretch:100%;font-size:20px;font-weight:700}
+.specs{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13.5px;margin:0}
+.specs dt{color:var(--muted)}
+.specs dd{margin:0}
+.bstock{display:flex;flex-direction:column;gap:6px;font-size:13.5px}
+.bstock div{display:flex;align-items:center;gap:8px}
+.bstock .q{margin-left:auto;color:var(--muted);font-variant-numeric:tabular-nums}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:var(--r);font-weight:600;font-size:14px;z-index:100;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+</style>
+</head>
+<body>
+
+<div class="topstrip"><div class="wrap">
+  <span>ცხელი ხაზი: <b data-set="hotline">+995 415 00 00 00</b></span>
+  <span data-set="deliveryNote">მიწოდება ზუგდიდში იმავე დღეს, 14:00-მდე შეკვეთისას</span>
+  <span>ორიგინალი და სერტიფიცირებული ანალოგები</span>
+</div></div>
+
+<header>
+  <div class="wrap hbar">
+    <a href="#top" class="logo" aria-label="Best Motors — მთავარი">
+      <span class="logo-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="2.5"/><path d="M12 3.5v5.5M12 15v5.5M3.5 12H9M15 12h5.5"/></svg></span>
+      <span class="logo-text">BEST <span>MOTORS</span></span>
+    </a>
+    <nav class="main" id="nav">
+      <a href="#catalog">კატალოგი</a>
+      <a href="#prices">ფასები</a>
+      <a href="#branches">ფილიალები</a>
+      <a href="#contact">კონტაქტი</a>
+    </nav>
+    <label class="hsearch">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="ნაწილის სახელი, ბრენდი ან OEM ნომერი" aria-label="ძებნა">
+    </label>
+    <button class="cartbtn" id="openCart" aria-label="კალათა">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+      <span class="lbl">კალათა</span><span class="count" id="cartCount">0</span>
+    </button>
+    <button class="menubtn" id="menuBtn" aria-label="მენიუ" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">ავტონაწილების მაღაზია · 2009 წლიდან</div>
+      <h1 style="margin-top:10px">სწორი ნაწილი <em>შენი მანქანისთვის</em></h1>
+      <p class="lead">აირჩიე მარკა და მოდელი, ნახე მხოლოდ შესაბამისი ნაწილები და გაიგე, რომელ ფილიალშია მარაგში. შეუკვეთე ონლაინ ან წაიღე მაღაზიიდან.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px">
+        <a class="btn" href="#catalog">კატალოგის ნახვა</a>
+        <a class="btn ghost" href="#branches">უახლოესი ფილიალი</a>
+      </div>
+      <div class="hero-stats">
+        <div><b>12 000+</b><span>ნაწილი მარაგში</span></div>
+        <div><b id="brCount">3</b><span>ფილიალი ზუგდიდში</span></div>
+        <div><b>1 წელი</b><span>გარანტია ნაწილებზე</span></div>
+      </div>
+    </div>
+    <div class="picker">
+      <h3>შეარჩიე ავტომობილით</h3>
+      <p class="sub">კატალოგი გაჩვენებს მხოლოდ თავსებად ნაწილებს</p>
+      <div class="picker-grid">
+        <div class="field"><label for="pMake">მარკა</label><select id="pMake"></select></div>
+        <div class="field"><label for="pModel">მოდელი</label><select id="pModel" disabled><option value="">—</option></select></div>
+        <div class="field"><label for="pYear">წელი</label><select id="pYear"></select></div>
+      </div>
+      <button class="btn" id="pGo" style="width:100%;justify-content:center">ნაწილების ჩვენება</button>
+      <div class="vin">
+        <span>VIN კოდი:</span>
+        <input id="vin" maxlength="20" placeholder="VIN ან ძარის ნომერი" aria-label="VIN კოდი ან იაპონური ძარის ნომერი" autocomplete="off" spellcheck="false">
+        <button class="btn ghost" id="vinGo" style="padding:8px 12px">შემოწმება</button>
+      </div>
+      <div id="vinMsg" class="vin-box" hidden></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><div class="cats" id="cats"></div></div>
+
+<section class="block" id="catalog" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">კატალოგი</div><h2>ნაწილები და ფასები</h2></div>
+    </div>
+    <div class="catalog">
+      <aside class="rail" id="rail" data-collapsed="true">
+        <button class="rail-toggle" id="railToggle" aria-expanded="false">ფილტრები <span>+</span></button>
+        <div class="rail-body">
+          <div><h4>ბრენდი</h4><div class="checks" id="fBrands"></div></div>
+          <div><h4>ფასი, ₾</h4>
+            <div class="price-row"><input id="pMin" type="number" min="0" placeholder="დან" aria-label="მინიმალური ფასი"><span>–</span><input id="pMax" type="number" min="0" placeholder="მდე" aria-label="მაქსიმალური ფასი"></div>
+          </div>
+          <div><h4>ფილიალი</h4><div class="checks" id="fBranch"></div></div>
+          <div class="checks"><label><input type="checkbox" id="fStock"> მხოლოდ მარაგში</label><label><input type="checkbox" id="fSale"> მხოლოდ ფასდაკლებით</label></div>
+          <button class="btn ghost" id="reset">ფილტრების გასუფთავება</button>
+        </div>
+      </aside>
+      <div style="min-width:0">
+        <div class="toolbar">
+          <span class="found" id="found"></span>
+          <label class="note" for="sort">დალაგება</label>
+          <select id="sort">
+            <option value="pop">პოპულარული</option>
+            <option value="asc">ფასი: იაფიდან</option>
+            <option value="desc">ფასი: ძვირიდან</option>
+            <option value="name">სახელით</option>
+          </select>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="grid" id="grid"></div>
+        <div class="more"><button class="btn ghost" id="moreBtn" hidden>მეტის ჩვენება</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services">
+  <div class="wrap svc-grid">
+    <div class="svc"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><div><b>მიწოდება</b><span><span id="delivTxt">ზუგდიდში 5 ₾, 150 ₾-დან უფასო.</span> სხვა ქალაქებში 1–2 დღე.</span></div></div>
+    <div class="svc"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><div><b>გარანტია</b><span>12 თვე ყველა ნაწილზე, ჩეკით ან შეკვეთის ნომრით.</span></div></div>
+    <div class="svc"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4"/></svg><div><b>დაბრუნება</b><span>14 დღე დაუმონტაჟებელ ნაწილზე, ორიგინალ შეფუთვაში.</span></div></div>
+    <div class="svc"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><div><b>მონტაჟი</b><span>პარტნიორ სერვისებში ფასდაკლება Best Motors-ის ჩეკით.</span></div></div>
+  </div>
+</section>
+
+<section class="block" id="prices">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">ფასები</div><h2>ფასების ცხრილი</h2><p>საორიენტაციო ფასები პოპულარულ კატეგორიებზე. ზუსტი ფასი დამოკიდებულია ავტომობილზე და ბრენდზე.</p></div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>კატეგორია</th><th>რა შედის</th><th>ბრენდები</th><th style="text-align:right">ფასი, ₾</th></tr></thead>
+        <tbody id="ptable"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="branches" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">ფილიალები</div><h2>გვესტუმრეთ</h2><p>სამივე ფილიალი ზუგდიდშია. სტატუსი ნაჩვენებია ამ წუთის მიხედვით.</p></div>
+    </div>
+    <div class="branches" id="branchList"></div>
+  </div>
+</section>
+
+<section class="block" id="contact" style="padding-top:8px">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow">კონტაქტი</div><h2>ვერ იპოვე საჭირო ნაწილი?</h2><p>მოგვწერე მანქანის მონაცემები და კონსულტანტი მოგიძებნის.</p></div></div>
+    <div class="contact-grid">
+      <div class="cinfo">
+        <div class="cline"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><div><small>ცხელი ხაზი</small><span class="val" data-set="hotline">+995 415 00 00 00</span></div><button class="copy" data-copy-set="hotline">კოპირება</button></div>
+        <div class="cline"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><div><small>ელფოსტა</small><span class="val" data-set="email">info@bestmotors.ge</span></div><button class="copy" data-copy-set="email">კოპირება</button></div>
+        <div class="cline"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><small>ცხელი ხაზის საათები</small><span class="val" data-set="hotlineHours">ყოველდღე 09:00 – 21:00</span></div></div>
+        <div class="cline"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg><div><small>სოციალური ქსელები</small><span class="val" data-set="facebook">facebook.com/bestmotors.ge</span></div></div>
+      </div>
+      <form class="cform" id="cform" novalidate>
+        <div class="field"><label for="cName">სახელი</label><input id="cName" required autocomplete="name"></div>
+        <div class="field"><label for="cPhone">ტელეფონი</label><input id="cPhone" required inputmode="tel" placeholder="5XX XX XX XX" autocomplete="tel"></div>
+        <div class="field"><label for="cCar">ავტომობილი</label><input id="cCar" placeholder="მაგ. Toyota Prius 2014"></div>
+        <div class="field"><label for="cVin">VIN (არასავალდებულო)</label><input id="cVin" maxlength="17" style="font-family:var(--mono);text-transform:uppercase"></div>
+        <div class="field full"><label for="cMsg">რა ნაწილი გჭირდება?</label><textarea id="cMsg" rows="4" required></textarea></div>
+        <div class="full" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <button class="btn" type="submit">მოთხოვნის მომზადება</button>
+          <span class="note" id="cErr" hidden></span>
+        </div>
+        <div class="full okmsg" id="cOk" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <span>© 2026 Best Motors. ყველა უფლება დაცულია.</span>
+  <span>ფასები მითითებულია ლარში (₾), დღგ-ს ჩათვლით.</span>
+</div></footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-label="კალათა">
+  <div class="dhead"><h3 id="dTitle">კალათა</h3><button class="x" id="closeCart" aria-label="დახურვა">×</button></div>
+  <div class="dbody" id="dbody"></div>
+  <div class="dfoot" id="dfoot"></div>
+</aside>
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const ICONS={
+ brakes:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="32" cy="32" r="24"/><circle cx="32" cy="32" r="9"/><circle cx="32" cy="32" r="3"/><g stroke-width="2"><circle cx="32" cy="17" r="1.6"/><circle cx="47" cy="32" r="1.6"/><circle cx="32" cy="47" r="1.6"/><circle cx="17" cy="32" r="1.6"/></g><path d="M44 12c6 3 10 9 11 15h-8c-1-4-3-7-6-9z" fill="currentColor" fill-opacity=".25"/></svg>',
+ filters:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="16" y="10" width="32" height="44" rx="4"/><path d="M16 18h32M16 46h32"/><path d="M22 22v20M27 22v20M32 22v20M37 22v20M42 22v20" stroke-width="1.6"/></svg>',
+ oil:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M18 18h22l8 8v28a2 2 0 0 1-2 2H18a2 2 0 0 1-2-2V20a2 2 0 0 1 2-2z"/><path d="M26 18v-6h10v6"/><rect x="22" y="30" width="20" height="14" rx="2"/><path d="M48 26h4v8"/></svg>',
+ ignition:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="27" y="6" width="10" height="10" rx="2"/><path d="M24 16h16v14H24z"/><path d="M26 30h12v10H26z"/><path d="M29 40h6v8h-6zM32 48v6"/><path d="M28 54h8" /><path d="M25 21h14M25 25h14" stroke-width="1.6"/></svg>',
+ battery:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="8" y="18" width="48" height="34" rx="3"/><path d="M14 18v-5h8v5M42 18v-5h8v5"/><path d="M15 32h8M19 28v8M41 32h8"/><path d="M33 26l-4 8h6l-4 8" stroke-width="2"/></svg>',
+ suspension:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="32" cy="8" r="3"/><path d="M32 11v6"/><path d="M24 17h16M24 17l16 5-16 5 16 5-16 5 16 5"/><rect x="27" y="42" width="10" height="12" rx="2"/><circle cx="32" cy="58" r="3"/></svg>',
+ lighting:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M24 40c-5-3-8-8-8-14a16 16 0 0 1 32 0c0 6-3 11-8 14v6H24z"/><path d="M24 50h16M27 55h10"/><path d="M28 30l4-6 4 6" stroke-width="1.8"/></svg>',
+ engine:'<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="20" cy="22" r="10"/><circle cx="44" cy="22" r="7"/><circle cx="32" cy="46" r="10"/><path d="M11 25l12 29M28 13l20 3M51 25l-10 27" stroke-width="2"/><circle cx="20" cy="22" r="3"/><circle cx="32" cy="46" r="3"/></svg>'
+};
+const CATS=[
+ {id:'brakes',name:'სამუხრუჭე სისტემა',range:'ხუნდები, დისკები, სითხე',from:28,to:420,brands:'Brembo, Bosch, TRW, ATE'},
+ {id:'filters',name:'ფილტრები',range:'ზეთის, ჰაერის, სალონის, საწვავის',from:18,to:95,brands:'Mann, Mahle, Bosch'},
+ {id:'oil',name:'ზეთები და სითხეები',range:'ძრავის ზეთი, ანტიფრიზი',from:25,to:190,brands:'Castrol, Mobil 1, Liqui Moly'},
+ {id:'ignition',name:'ანთების სისტემა',range:'სანთლები, კოჭები',from:22,to:180,brands:'NGK, Denso, Bosch'},
+ {id:'battery',name:'აკუმულატორები',range:'45–100 Ah',from:210,to:520,brands:'Varta, Bosch, Exide'},
+ {id:'suspension',name:'სავალი ნაწილი',range:'ამორტიზატორები, ბერკეტები, შარნირები',from:45,to:380,brands:'Sachs, Lemförder, Febi'},
+ {id:'lighting',name:'განათება',range:'ნათურები H1–H11, ქსენონი',from:15,to:260,brands:'Osram, Philips'},
+ {id:'engine',name:'ძრავის ნაწილები',range:'ღვედები, ტუმბოები, გორგოლაჭები',from:40,to:650,brands:'Gates, Contitech, Aisin'}
+];
+let BRANCHES=[],BIDS=[],SET={deliveryFee:5,freeDeliveryFrom:150};
+const POPULAR=['Toyota','Mercedes-Benz','Hyundai','Lexus','BMW','Ford','Nissan','Subaru','Honda','Kia','Volkswagen','Opel','Mitsubishi','Chevrolet','Mazda','Jeep','Audi'];
+const MAKES={
+ 'Toyota':['4Runner','Alphard','Aqua','Auris','Avalon','Avensis','bZ4X','C-HR','Camry','Corolla','Corolla Cross','Crown','Estima','FJ Cruiser','Fortuner','GR86','Harrier','Highlander','Hilux','Ist','Land Cruiser','Land Cruiser Prado','Mark X','Matrix','Noah','Prius','Prius C','Prius Prime','Prius V','RAV4','Sequoia','Sienna','Tacoma','Tundra','Venza','Vitz','Voxy','Wish','Yaris'],
+ 'Lexus':['CT','ES','GS','GX','HS','IS','LC','LS','LX','NX','RC','RX','RZ','TX','UX'],
+ 'Mercedes-Benz':['A-Class','B-Class','C-Class','CLA','CLK','CLS','E-Class','EQE','EQS','G-Class','GL','GLA','GLB','GLC','GLE','GLK','GLS','Metris','ML','S-Class','SL','SLK','Sprinter','Viano','Vito'],
+ 'BMW':['1 Series','2 Series','3 Series','4 Series','5 Series','6 Series','7 Series','8 Series','i3','i4','iX','M3','M5','X1','X2','X3','X4','X5','X6','X7','Z4'],
+ 'Hyundai':['Accent','Azera','Creta','Elantra','Genesis','Getz','Grandeur','i10','i20','i30','Ioniq','Ioniq 5','ix35','Kona','Palisade','Santa Cruz','Santa Fe','Sonata','Starex (H-1)','Tucson','Veloster','Venue'],
+ 'Kia':['Carnival','Ceed','Cerato','EV6','Forte','K5','Mohave','Niro','Optima','Picanto','Rio','Seltos','Sorento','Soul','Sportage','Stinger','Telluride'],
+ 'Volkswagen':['Amarok','Arteon','Atlas','Beetle','Caddy','CC','Golf','ID.4','Jetta','Passat','Phaeton','Polo','Scirocco','Sharan','T-Roc','Taos','Tiguan','Touareg','Touran','Transporter'],
+ 'Ford':['Bronco','C-Max','EcoSport','Edge','Escape','Expedition','Explorer','F-150','Fiesta','Focus','Fusion','Galaxy','Kuga','Maverick','Mondeo','Mustang','Mustang Mach-E','Ranger','Transit'],
+ 'Nissan':['350Z','370Z','Altima','Armada','Frontier','Juke','Kicks','Leaf','Maxima','Micra','Murano','Navara','Note','Pathfinder','Patrol','Qashqai','Rogue','Sentra','Teana','Tiida','Titan','Versa','X-Trail'],
+ 'Honda':['Accord','City','Civic','CR-V','CR-Z','Crosstour','Element','Fit','Freed','HR-V','Insight','Jazz','Odyssey','Pilot','Ridgeline','Stepwgn','Vezel'],
+ 'Subaru':['Ascent','BRZ','Crosstrek','Forester','Impreza','Legacy','Outback','Solterra','Tribeca','WRX','XV'],
+ 'Mitsubishi':['ASX','Colt','Delica','Eclipse Cross','Galant','L200','Lancer','Mirage','Montero / Pajero','Outlander','Outlander Sport','Pajero Sport'],
+ 'Mazda':['CX-3','CX-30','CX-5','CX-50','CX-7','CX-9','CX-90','Demio','Mazda2','Mazda3','Mazda5','Mazda6','MX-5','RX-8','Tribute'],
+ 'Chevrolet':['Aveo','Blazer','Bolt','Camaro','Captiva','Cavalier','Cobalt','Corvette','Colorado','Cruze','Equinox','Express','Impala','Lacetti','Malibu','Niva','Orlando','Silverado','Spark','Suburban','Tahoe','Trailblazer','Traverse','Trax','Volt'],
+ 'Opel':['Antara','Astra','Combo','Corsa','Crossland','Frontera','Grandland','Insignia','Meriva','Mokka','Omega','Signum','Vectra','Vivaro','Zafira'],
+ 'Audi':['A1','A3','A4','A5','A6','A7','A8','Allroad','e-tron','Q2','Q3','Q5','Q7','Q8','R8','TT'],
+ 'Porsche':['911','Boxster','Cayenne','Cayman','Macan','Panamera','Taycan'],
+ 'Land Rover':['Defender','Discovery','Discovery Sport','Freelander','Range Rover','Range Rover Evoque','Range Rover Sport','Range Rover Velar'],
+ 'Jeep':['Cherokee','Commander','Compass','Gladiator','Grand Cherokee','Liberty','Patriot','Renegade','Wrangler'],
+ 'Dodge':['Avenger','Caliber','Challenger','Charger','Dart','Durango','Grand Caravan','Journey','Ram'],
+ 'Ram':['1500','2500','ProMaster'],
+ 'Chrysler':['200','300','Pacifica','PT Cruiser','Town & Country','Voyager'],
+ 'Infiniti':['EX','FX','G','JX','M','Q50','Q60','Q70','QX50','QX56','QX60','QX70','QX80'],
+ 'Acura':['ILX','Integra','MDX','RDX','RL','TL','TLX','TSX','ZDX'],
+ 'Tesla':['Cybertruck','Model 3','Model S','Model X','Model Y'],
+ 'Volvo':['C30','S40','S60','S80','S90','V40','V60','V70','V90','XC40','XC60','XC70','XC90'],
+ 'Mini':['Clubman','Cooper','Countryman','Paceman'],
+ 'Peugeot':['206','207','208','301','307','308','406','407','408','508','2008','3008','5008','Boxer','Expert','Partner'],
+ 'Renault':['Arkana','Clio','Duster','Fluence','Kangoo','Koleos','Laguna','Logan','Master','Megane','Sandero','Scenic','Symbol','Trafic'],
+ 'Citroen':['Berlingo','C-Elysee','C3','C4','C5','Jumper','Jumpy','Xsara'],
+ 'Skoda':['Fabia','Kamiq','Karoq','Kodiaq','Octavia','Rapid','Roomster','Superb','Yeti'],
+ 'Fiat':['500','500X','Albea','Doblo','Ducato','Linea','Panda','Punto','Tipo'],
+ 'Suzuki':['Alto','Baleno','Grand Vitara','Ignis','Jimny','Kizashi','Splash','Swift','SX4','Vitara','XL7'],
+ 'Daewoo':['Damas','Gentra','Lanos','Leganza','Matiz','Nexia','Nubira'],
+ 'SsangYong':['Actyon','Korando','Kyron','Musso','Rexton','Tivoli'],
+ 'Lada (VAZ)':['2101–2107','2108–2115','4x4 / Niva','Granta','Kalina','Largus','Niva Travel','Priora','Vesta','XRAY'],
+ 'GAZ':['Gazelle','Gazelle Next','Sobol','Volga'],
+ 'UAZ':['Bukhanka','Hunter','Patriot','Pickup'],
+ 'Geely':['Atlas','Coolray','Emgrand','Geometry C','Monjaro','Okavango','Tugella'],
+ 'Chery':['Arrizo','Tiggo 2','Tiggo 4','Tiggo 7','Tiggo 8'],
+ 'BYD':['Atto 3','Dolphin','Han','Seal','Song','Tang','Yuan'],
+ 'Haval':['Dargo','F7','H2','H6','H9','Jolion'],
+ 'Isuzu':['D-Max','MU-X','NPR','Trooper'],
+ 'Cadillac':['ATS','CT5','CTS','Escalade','SRX','XT4','XT5','XT6'],
+ 'GMC':['Acadia','Savana','Sierra','Terrain','Yukon'],
+ 'Buick':['Enclave','Encore','Envision','LaCrosse','Regal','Verano'],
+ 'Lincoln':['Aviator','Continental','Corsair','MKC','MKX','MKZ','Nautilus','Navigator'],
+ 'Genesis':['G70','G80','G90','GV70','GV80'],
+ 'Jaguar':['E-Pace','F-Pace','F-Type','I-Pace','XE','XF','XJ'],
+ 'Seat':['Alhambra','Arona','Ateca','Ibiza','Leon','Toledo'],
+ 'Alfa Romeo':['147','156','159','Giulia','Giulietta','Stelvio'],
+ 'Dacia':['Duster','Logan','Sandero','Spring'],
+ 'Smart':['ForFour','ForTwo'],
+ 'Hummer':['H2','H3']
+};
+let P=[];
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const gel=n=>n.toLocaleString('ka-GE',{maximumFractionDigits:2}).replace(/ /g,' ');
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+const state={q:'',cat:null,brands:new Set(),branch:new Set(),min:null,max:null,stock:false,sale:false,sort:'pop',make:null,model:null,year:null,shown:12};
+let cart=store.get('bm-cart',{});
+let mode='pickup';
+
+
+const fitsTxt=p=>p.fits[0]==='*'?'უნივერსალური':p.fits.join(', ');
+
+function toast(t){const el=$('#toast');el.textContent=t;el.hidden=false;clearTimeout(toast.t);toast.t=setTimeout(()=>el.hidden=true,2200)}
+
+/* categories */
+function renderCats(){
+  $('#cats').innerHTML=CATS.map(c=>{const n=P.filter(p=>p.cat===c.id).length;return `<button class="cat" data-cat="${c.id}" aria-pressed="${state.cat===c.id}">${ICONS[c.id].replace('<svg','<svg width="34" height="34"')}<span>${c.name}</span><small>${n} პროდუქტი</small></button>`}).join('');
+}
+$('#cats').addEventListener('click',e=>{const b=e.target.closest('.cat');if(!b)return;state.cat=state.cat===b.dataset.cat?null:b.dataset.cat;state.shown=12;renderCats();render();document.getElementById('catalog').scrollIntoView()});
+
+/* picker */
+function initPicker(){
+  const rest=Object.keys(MAKES).filter(m=>!POPULAR.includes(m)).sort((a,b)=>a.localeCompare(b));
+  $('#pMake').innerHTML='<option value="">ყველა მარკა</option>'+
+    `<optgroup label="პოპულარული საქართველოში">${POPULAR.map(m=>`<option>${m}</option>`).join('')}</optgroup>`+
+    `<optgroup label="სხვა მარკები">${rest.map(m=>`<option>${m}</option>`).join('')}</optgroup>`;
+  const y=new Date().getFullYear()+1;let o='<option value="">ნებისმიერი</option>';for(let i=y;i>=1980;i--)o+=`<option>${i}</option>`;$('#pYear').innerHTML=o;
+}
+function setModels(m){const s=$('#pModel');s.disabled=!m;s.innerHTML='<option value="">ყველა მოდელი</option>'+(m&&MAKES[m]?MAKES[m].map(x=>`<option>${esc(x)}</option>`).join(''):'')}
+$('#pMake').addEventListener('change',e=>setModels(e.target.value));
+$('#pModel').addEventListener('change',e=>e.target.classList.remove('need'));
+$('#pGo').addEventListener('click',()=>{state.make=$('#pMake').value||null;state.model=$('#pModel').value||null;state.year=$('#pYear').value||null;state.shown=12;render();document.getElementById('catalog').scrollIntoView()});
+
+/* ---------- VIN decoder (offline) ---------- */
+// WMI → make. 3-character codes are checked first, then 2-character.
+const WMI=(()=>{const t={
+ 'Toyota':'JT,JTD,JTE,JTF,JTK,JTL,JTM,JTN,2T1,2T3,3TM,3TY,4T1,4T3,4T4,5TD,5TF,5TE,5YF,1NX,MR0,MR1,MR2,NMT,SB1,VNK,AHT,7MU',
+ 'Lexus':'JTH,JTJ,2T2,58A,58B',
+ 'Mercedes-Benz':'WDB,WDC,WDD,WDF,W1K,W1N,W1V,W1W,W1X,4JG,55S,WD3,WD4,8AC',
+ 'BMW':'WBA,WBS,WBX,WBY,5UX,5YM,4US,WBW',
+ 'Mini':'WMW,WMZ',
+ 'Hyundai':'KMH,KMF,KMJ,KM8,5NP,5NM,3KM,TMA,MAL,NLH,X7M',
+ 'Genesis':'KMT',
+ 'Kia':'KNA,KNC,KND,KNE,KNM,5XX,5XY,3KP,U5Y,U6Y,XWE',
+ 'Volkswagen':'WVW,WVG,WV1,WV2,WV3,1VW,3VW,3VV,9BW,AAV,8AW',
+ 'Audi':'WAU,WA1,WUA,TRU',
+ 'Porsche':'WP0,WP1',
+ 'Skoda':'TMB,TMP',
+ 'Seat':'VSS,VS6',
+ 'Ford':'1ZV,1FA,1FB,1FC,1FD,1FM,1FT,2FA,2FM,2FT,3FA,3FM,3FT,WF0,NM0,MAJ,X9F,6FP,1LN',
+ 'Lincoln':'1LN,2LM,3LN,5LM',
+ 'Chevrolet':'1G1,1GC,1GN,2G1,2GN,3G1,3GN,KL1,KL7,KL8,9BG,Y6D,XUU',
+ 'GMC':'1GT,2GT,3GT,1GK',
+ 'Cadillac':'1G6,1GY',
+ 'Buick':'1G4,2G4,5GA,KL4,LRB',
+ 'Hummer':'5GR,5GT',
+ 'Daewoo':'KLA,KLY,XWB',
+ 'Opel':'W0L,W0V,VXK',
+ 'Nissan':'JN1,JN3,JN6,JN8,1N4,1N6,3N1,3N6,5N1,KNM,SJN,VSK,Z8N',
+ 'Infiniti':'3PC,JNK,JNR,JNX,5N3',
+ 'Honda':'3CZ,5FP,JHM,JHL,JHG,1HG,2HG,3HG,19X,5FN,5J6,2HK,7FA,SHH,SHS,MRH',
+ 'Acura':'JH4,19U,5J8,2HN',
+ 'Subaru':'JF1,JF2,JF3,4S3,4S4,4S6',
+ 'Mitsubishi':'JA3,JA4,JA7,JMB,JMY,ML3,4A3,4A4,MMB,MMC',
+ 'Mazda':'JM1,JM3,JM6,JMZ,1YV,3MZ,3MV,4F2,4F4',
+ 'Suzuki':'JS1,JS2,JS3,JS4,TSM,KL5,MA3',
+ 'Isuzu':'JAA,JAB,JAC,JAL,4S2,MP1',
+ 'Jeep':'1J4,1J8,1C4,3C4,ZAC',
+ 'Dodge':'1B3,1B4,1B7,2B3,2B4,3B3,1D3,1D7,2C3,2D4,1C3,2C4,3C6,1C6,3D7',
+ 'Chrysler':'1C3,2C3,2A4,2A8,1A8,3A4,3A8',
+ 'Ram':'3C6,3C7,1C6,3D7,2C7',
+ 'Tesla':'5YJ,7SA,7G2,LRW,XP7',
+ 'Volvo':'YV1,YV2,YV4,LVY,7JR',
+ 'Land Rover':'SAL',
+ 'Jaguar':'SAJ,SAD',
+ 'Peugeot':'VF3,VR3,VGA',
+ 'Citroen':'VF7,VR7',
+ 'Renault':'VF1,VF6,X7L,VF8',
+ 'Dacia':'UU1,UU6',
+ 'Fiat':'ZFA,ZFC,ZFE,3C3',
+ 'Alfa Romeo':'ZAR,ZAS',
+ 'Smart':'WME',
+ 'SsangYong':'KPT,KPA',
+ 'Lada (VAZ)':'XTA,XTB,XTC',
+ 'GAZ':'X96,XTH',
+ 'UAZ':'XTT',
+ 'Geely':'LB3,L6T,Y4K',
+ 'Chery':'LVV,LVT,X9W',
+ 'BYD':'LGX,LC0,LGB',
+ 'Haval':'LGW,X9X'
+};const m={};for(const[k,v]of Object.entries(t))v.split(',').forEach(c=>{if(!m[c])m[c]=k});return m})();
+// Shared codes: some WMIs are used by two related brands. Decided by model below where possible.
+const SHARED={'5N1':['Infiniti','Nissan'],'JN8':['Infiniti','Nissan'],'JN1':['Infiniti','Nissan'],'1C3':['Chrysler','Dodge'],'2C3':['Chrysler','Dodge'],'3C6':['Ram','Dodge'],'1C6':['Ram','Dodge'],'3D7':['Ram','Dodge'],'1LN':['Lincoln','Ford'],'3C3':['Fiat','Chrysler']};
+
+// Model patterns: [regex on the full VIN, model]. Checked top to bottom, first match wins.
+const VDS={
+ 'Toyota':[[/^JTDKB2[02]U|^JTDKN3D[UP]|^JTDKARFU|^JTDKAMFU|^JTDL9RFU/,'Prius'],[/^JTDKARFP|^JTDKAMFP/,'Prius Prime'],[/^JTDKDTB3/,'Prius C'],[/^JTDZN3EU/,'Prius V'],
+  [/^4T1BK1EB|^4T1BK3DB|^4T1JA1AB|^4T1BD1EB/,'Avalon'],[/^NMTK|^JTNK/,'C-HR'],[/^4T1.{4}K|^JTNB/,'Camry'],
+  [/^2T1B[RU]|^5YF[BE]|^JTDEPRAE|^JTDBR|^1NXBR|^JTDS4RCE|^JTDBT4K/,'Corolla'],[/^2T1KR|^2T1KU/,'Matrix'],
+  [/^2T3|^JTM.{4}V/,'RAV4'],[/^JTMHY|^JTMCY|^JTMHT|^JTMHV|^JTMHX/,'Land Cruiser'],[/^JTEB[UH]|^JTEZU|^JTEU|^JTEMU/,'4Runner'],[/^JTJBU|^JTEBU5J/,'Land Cruiser Prado'],
+  [/^5TD.{4}H/,'Highlander'],[/^5TD.{4}C/,'Sienna'],[/^5TD.{4}[0-9]|^5TDBY|^5TDJY/,'Sequoia'],[/^4T3/,'Venza'],
+  [/^3TM|^5TF.{4}N|^5TE/,'Tacoma'],[/^5TF|^5TB/,'Tundra'],[/^JTDJT|^JTDKT|^VNKK|^3MYDL/,'Yaris'],[/^SB1/,'Auris'],[/^JTMA/,'bZ4X']],
+ 'Lexus':[[/^JTJBM7|^JTJAM7|^JTJBT20|^JTJJM7/,'GX'],[/^JTJHY|^JTJBY|^JTJDY|^JTJHW/,'LX'],[/^JTJ.{2}R[BD]|^JTJ.ARB|^JTJ.ARD|^JTJ.AAD/,'NX'],[/^2T2|^JTJ/,'RX'],
+  [/^58A|^JTHB[KW]1G|^JTHB[KW]1|^JTHBK/,'ES'],[/^JTHB[AF]1D|^JTHC[EF]1|^JTHGZ|^JTHBA|^JTHCZ/,'IS'],[/^JTHB[EZ]1|^JTHCE1BL/,'GS'],[/^JTHKD5BH/,'CT'],[/^JTHX|^JTHP3/,'UX'],[/^JTHH/,'LC'],[/^JTHB5|^JTHC5|^JTHD5/,'LS'],[/^JTHHP/,'RC']],
+ 'Hyundai':[[/^5NPD|^KMHD|^5NPL|^KMHL[A-Z]/,'Elantra'],[/^5NPE|^KMHE|^KMHL[0-9]/,'Sonata'],[/^KM8J|^5NMJ/,'Tucson'],[/^KM8S|^5NMS|^5NMZ|^5NMP/,'Santa Fe'],[/^KM8K/,'Kona'],[/^KM8R/,'Palisade'],
+  [/^KMHC[0-9]/,'Ioniq'],[/^KM8KR|^KM8KN/,'Ioniq 5'],[/^KMHC|^3KPC/,'Accent'],[/^KMHT/,'Veloster'],[/^KMHFG|^KMHFH|^KMHFC/,'Azera'],[/^KMHG|^KMHF/,'Genesis'],[/^KMJ|^KMFW/,'Starex (H-1)'],[/^5NTJ/,'Santa Cruz'],[/^KMHR/,'Venue']],
+ 'Kia':[[/^KNAG|^5XXG/,'Optima'],[/^KNDP/,'Sportage'],[/^KNDJ/,'Soul'],[/^5XYP3|^5XYP5/,'Telluride'],[/^5XYK|^5XYP[A-Z]/,'Sorento'],[/^KNAF|^3KPF/,'Forte'],[/^KNAD|^3KPA/,'Rio'],[/^KNDM/,'Carnival'],[/^KNDC/,'Niro'],[/^KNDE/,'Seltos'],[/^KNAE/,'Stinger'],[/^KNAB|^KNAK/,'Picanto'],[/^KNDC3|^KNDC4/,'EV6']],
+ 'Honda':[[/^1HGC|^JHMC|^1HGCV|^1HGCR/,'Accord'],[/^19XF|^2HGF|^19XZ|^SHHF|^2HGE|^1HGE/,'Civic'],[/^5J6R|^2HKR|^7FAR|^JHLR|^SHSR/,'CR-V'],[/^JHMG|^3HGG/,'Fit'],[/^5FNR/,'Odyssey'],[/^5FNY|^2HKY/,'Pilot'],[/^JHMZE|^19XZE/,'Insight'],[/^3CZR|^JHMR|^3CZRU/,'HR-V'],[/^5FPY/,'Ridgeline'],[/^5J6Y/,'Element'],[/^5J6TF/,'Crosstour']],
+ 'Acura':[[/^2HNY|^5J8Y|^5FRY/,'MDX'],[/^5J8TB|^5J8TC|^JH4TB/,'RDX'],[/^19UUA|^19UUB/,'TLX'],[/^19UDE|^19VDE/,'ILX'],[/^JH4CU/,'TSX'],[/^JH4UA|^19UUA6/,'TL'],[/^JH4DC/,'Integra']],
+ 'Infiniti':[[/^JN1EV|^JN1BV7|^JN1CV7/,'Q50'],[/^JN1FV|^JN1CV6/,'Q60'],[/^JNKCV|^JNKBV/,'G'],[/^JNRAS|^JNRBS/,'FX'],[/^JNKAJ|^3PCAJ/,'QX50'],[/^5N1AL|^5N1DL|^JN8AL/,'QX60'],[/^JN8AZ2/,'QX80'],[/^JNKAY|^JN1BY/,'M']],
+ 'Nissan':[[/^1N4A[ABL]|^1N4BL|^1N4CL/,'Altima'],[/^3N1AB|^3N1CB/,'Sentra'],[/^3N1CN|^3N1BC|^3N1CE/,'Versa'],[/^JN8AF|^JN1AF/,'Juke'],[/^KNMAT|^JN8AT|^5N1AT|^JN8AS|^JN8BT/,'Rogue'],[/^5N1AZ|^JN8AZ|^5N1BZ/,'Murano'],[/^5N1AR|^5N1DR/,'Pathfinder'],[/^1N4AZ|^1N4BZ/,'Leaf'],[/^1N4AA|^1N4BA/,'Maxima'],[/^JN1AZ|^JN1CZ/,'370Z'],[/^1N6/,'Frontier'],[/^JN1TB|^JN8T|^JN1TA|^JN1TC/,'X-Trail'],[/^SJNF/,'Qashqai'],[/^3N1CP|^JN8DP/,'Kicks'],[/^5N1AA|^JN8AY/,'Armada'],[/^SJNFC|^SJNFB/,'Note']],
+ 'Subaru':[[/^JF2S[HJKL]/,'Forester'],[/^4S4B[PRSTU]/,'Outback'],[/^4S3B[EHLMNW]/,'Legacy'],[/^JF1V[AB]|^JF1GV/,'WRX'],[/^JF1G[DEHJPT]|^4S3G/,'Impreza'],[/^JF2G[PTH]/,'Crosstrek'],[/^4S4WM/,'Ascent'],[/^4S4WX|^4S4WY/,'Tribeca'],[/^JF1Z/,'BRZ']],
+ 'Ford':[[/^3FA6P0|^3FAHP0|^1FA6P0|^3FA6P/,'Fusion'],[/^1FMCU/,'Escape'],[/^1FAD[PU]3|^1FAHP3/,'Focus'],[/^1FA6P8|^1FATP8|^1ZVBP8|^1ZVHT8/,'Mustang'],[/^1FM5K|^1FMSK|^1FMEU/,'Explorer'],[/^1FT[EFMW]W|^1FTEX|^1FTFX/,'F-150'],[/^3FAD|^3FADP4/,'Fiesta'],[/^2FMDK|^2FMPK|^2FMTK/,'Edge'],[/^1FMJU|^1FMJK/,'Expedition'],[/^1FBZX|^1FTBW|^1FTYR|^1FBAX/,'Transit'],[/^1FADP5/,'C-Max'],[/^MAJ6|^MAJ3/,'EcoSport'],[/^3FMTK/,'Mustang Mach-E'],[/^1FTER/,'Ranger'],[/^1FMEE|^1FMDE|^3FMCR/,'Bronco'],[/^3FTTW/,'Maverick']],
+ 'Lincoln':[[/^3LN|^1LN6L/,'MKZ'],[/^2LM/,'MKX'],[/^5LM/,'Navigator']],
+ 'Chevrolet':[[/^1G1J/,'Cavalier'],[/^1G1Y/,'Corvette'],[/^1G1A[BDLKFP]/,'Cobalt'],[/^1G1N|^1G1Z|^1G1ZB|^1G1ZD/,'Malibu'],[/^1G1P|^1G1B[CE]|^3G1B|^KL1B/,'Cruze'],[/^1G1R/,'Volt'],[/^1G1F[ZBEX]|^1G1F[0-9]/,'Bolt'],[/^2G1F|^1G1FB|^1G1FA/,'Camaro'],[/^2G1W|^2G1105|^2G1115/,'Impala'],[/^2GNA|^2GNF|^3GNA|^2GNAX/,'Equinox'],[/^KL8C/,'Spark'],[/^KL7C|^3GNC/,'Trax'],[/^1GNK|^1GNE[RV]/,'Traverse'],[/^1GNS|^1GNW|^1GNSK/,'Tahoe'],[/^1GCU|^1GCV|^3GCU|^1GCR|^1GCP/,'Silverado'],[/^1GNZ|^KL1T/,'Aveo'],[/^3GNC|^KL79/,'Trax'],[/^3GNK|^1GNKV/,'Blazer'],[/^KL1J|^KLAJ/,'Lacetti'],[/^1GCG|^1GCS/,'Colorado'],[/^KL1N|^3G1J/,'Cobalt']],
+ 'Jeep':[[/^1C4RJ|^1J4RR|^1J8HR|^1J4G/,'Grand Cherokee'],[/^1C4PJ|^1J4LN/,'Cherokee'],[/^1C4BJ|^1C4HJ|^1J4BA|^1J4FA|^1C4GJ/,'Wrangler'],[/^1C4NJ|^3C4NJ/,'Compass'],[/^1C4NJR|^1J8FF/,'Patriot'],[/^ZACC|^ZACN/,'Renegade'],[/^1C6JJ|^1C6HJ/,'Gladiator'],[/^1J8GN|^1J4PN/,'Liberty']],
+ 'Dodge':[[/^2C3CDX|^2C3KA|^2C3CDZ|^2C3CDY/,'Charger'],[/^2C3CDZ|^2C3CDY[ABCD]/,'Challenger'],[/^1C4RD|^1D4RD/,'Durango'],[/^3C4PD/,'Journey'],[/^2D4R|^2C4RD|^2D8H/,'Grand Caravan'],[/^1C3CD|^1C3CC/,'Dart'],[/^1B3C|^1B3L/,'Caliber']],
+ 'Chrysler':[[/^2C3CC|^2C3CA|^2C3LA/,'300'],[/^2C4RC|^2A4RR|^2A8HR/,'Town & Country'],[/^2C4RC1/,'Pacifica'],[/^1C3CC|^1C3BC/,'200']],
+ 'Ram':[[/^1C6RR|^1C6SR|^3C6RR|^1D7/,'1500'],[/^3C6TR|^3C6UR|^3C6LR/,'2500']],
+ 'Tesla':[[/^5YJ3|^LRW3|^XP7Y?3/,'Model 3'],[/^5YJS/,'Model S'],[/^5YJX/,'Model X'],[/^5YJY|^7SAY|^LRWY|^XP7Y/,'Model Y'],[/^7G2C/,'Cybertruck']],
+ 'Mazda':[[/^JM1B[KLMNP]|^3MZB|^JM1BL|^3MZ/,'Mazda3'],[/^JM1G[GJL]|^1YVHP|^1YVHZ/,'Mazda6'],[/^JM3K[EF]|^JM3KF/,'CX-5'],[/^JM3T[BC]/,'CX-9'],[/^JM1DK|^JM1DE|^3MVD/,'CX-3'],[/^3MVD|^JM1DM/,'CX-30'],[/^JM3ER/,'CX-7'],[/^JM1NA|^JM1NB|^JM1NC|^JM1ND|^JMZND/,'MX-5'],[/^4F2Y|^4F2C/,'Tribute'],[/^JM1CR|^JM1CW/,'Mazda5'],[/^JM1DE|^JMZDE/,'Mazda2']],
+ 'Mitsubishi':[[/^JA4A[DZ]|^JA4AZ|^JA4AT|^JA4J/,'Outlander'],[/^4A4AR|^JA4AR|^JA4AP/,'Outlander Sport'],[/^JA32|^JA3A|^JA3AU/,'Lancer'],[/^ML32/,'Mirage'],[/^JA4AT/,'Eclipse Cross'],[/^JA4M|^JA4N/,'Montero / Pajero'],[/^MMB|^MMC/,'L200']],
+ 'Volvo':[[/^YV4.*[0-9]R|^YV4A22R|^YV4952|^YV4A2[23]/,'XC60'],[/^YV4.*[0-9]P|^YV4CZ8|^YV4A22P/,'XC90'],[/^YV4.*[0-9]K|^YV4AC2H/,'XC40'],[/^YV1.*[0-9]A|^YV1A22/,'S60'],[/^YV1.*[0-9]S|^YV1612/,'S80']]
+};
+// Group codes in positions 7–8 used by VW, Audi, Skoda and Seat on every VIN they issue.
+const VAG78={
+ 'Volkswagen':{'1J':'Golf','1K':'Golf','5K':'Golf','5G':'Golf','AU':'Golf','CD':'Golf','AJ':'Jetta','16':'Jetta','BU':'Jetta','9M':'Jetta','5C':'Beetle','AT':'Beetle','1C':'Beetle','1Y':'Beetle','3C':'Passat','A3':'Passat','3G':'Passat','CB':'Passat','35':'CC','5N':'Tiguan','AD':'Tiguan','AX':'Tiguan','BW':'Tiguan','7L':'Touareg','7P':'Touareg','CR':'Touareg','6R':'Polo','9N':'Polo','AW':'Polo','6C':'Polo','3H':'Arteon','CA':'Atlas','CX':'Atlas','1T':'Touran','7N':'Sharan','13':'Scirocco','2K':'Caddy','SA':'Caddy','2H':'Amarok','7H':'Transporter','7E':'Transporter','7J':'Transporter','SG':'Transporter','A1':'T-Roc','BJ':'Taos','E2':'ID.4','3D':'Phaeton'},
+ 'Audi':{'8E':'A4','8K':'A4','8W':'A4','8P':'A3','8V':'A3','8Y':'A3','8T':'A5','8F':'A5','F5':'A5','4F':'A6','4G':'A6','4A':'A6','4K':'A7','4E':'A8','4H':'A8','4N':'A8','8R':'Q5','FY':'Q5','4L':'Q7','4M':'Q7','8U':'Q3','F3':'Q3','8J':'TT','FV':'TT','8X':'A1','GB':'A1','GE':'e-tron','42':'R8','4S':'R8','GA':'Q2'},
+ 'Skoda':{'1Z':'Octavia','5E':'Octavia','NX':'Octavia','3T':'Superb','3V':'Superb','3U':'Superb','5J':'Fabia','6Y':'Fabia','NJ':'Fabia','NS':'Kodiaq','NU':'Karoq','5L':'Yeti','NH':'Rapid','NW':'Kamiq'},
+ 'Seat':{'1P':'Leon','5F':'Leon','KL':'Leon','6J':'Ibiza','6L':'Ibiza','KJ':'Ibiza','5P':'Toledo','KH':'Ateca','KJ7':'Arona','7N':'Alhambra'}
+};
+VDS['BMW']=[[/^5UX(ZV|KR|CR|JU|FE|ZW|TS)/,'X5'],[/^5UX(WX|TR|TY|WZ|KT|ZG)/,'X3'],[/^5UX(FG|KU|CY|FH)/,'X6'],[/^5UX(XW|UJ|UX)/,'X4'],[/^5UX(CW|BX)/,'X7'],[/^WBAV[LM]|^WBXH|^WBXJ|^WBXY/,'X1'],[/^WBXY|^WBXYH/,'X2'],
+  [/^WBA(3A|3B|3C|3D|3F|8A|8B|8D|8E|5R|5V|PH|VA|VB|VC)/,'3 Series'],[/^WBA(FR|FW|XG|JA|JB|JE|5A|DT|NE|HM)/,'5 Series'],[/^WBA(YE|7E|7F|7T|7U|KB|HL)/,'7 Series'],[/^WBA(3N|3R|4A|4B|4C|4D|4E|4F|4J)/,'4 Series'],[/^WBA(1F|1J|UL|UN)/,'1 Series'],[/^WBA(2F|1G|2M)/,'2 Series'],[/^WBY/,'i3'],[/^WBS/,'M3']];
+// Mercedes: European VINs carry the 3-digit body code at positions 4–6, US VINs a 2-letter class code at 4–5.
+const MB_EU={'203':'C-Class','204':'C-Class','205':'C-Class','206':'C-Class','210':'E-Class','211':'E-Class','212':'E-Class','213':'E-Class','214':'E-Class','207':'E-Class','220':'S-Class','221':'S-Class','222':'S-Class','223':'S-Class','163':'ML','164':'ML','166':'GLE','167':'GLE','292':'GLE','253':'GLC','254':'GLC','156':'GLA','247':'GLB','117':'CLA','118':'CLA','176':'A-Class','177':'A-Class','169':'A-Class','245':'B-Class','246':'B-Class','209':'CLK','208':'CLK','219':'CLS','218':'CLS','257':'CLS','463':'G-Class','461':'G-Class','465':'G-Class','906':'Sprinter','907':'Sprinter','910':'Sprinter','639':'Vito','447':'Vito','230':'SL','231':'SL','171':'SLK','172':'SLK','295':'EQE','297':'EQS'};
+const MB_US={'GF':'C-Class','GJ':'C-Class','WF':'C-Class','WK':'C-Class','HF':'E-Class','KJ':'E-Class','ZF':'E-Class','ZH':'E-Class','UF':'E-Class','UG':'S-Class','NG':'S-Class','DA':'GLE','ED':'GLE','FB':'GLE','DB':'ML','BB':'ML','BF':'GL','DF':'GLS','FF':'GLS','GG':'GLK','0G':'GLC','TG':'GLC','SJ':'CLA','TB':'GLA','4H':'GLB','JJ':'CLS','LJ':'CLS','PE':'Sprinter','PF':'Sprinter','PG':'Metris','YJ':'G-Class','YC':'G-Class'};
+const COUNTRY=[[/^[145]/,'აშშ'],[/^7[F-Z]/,'აშშ'],[/^2/,'კანადა'],[/^3[A-W]/,'მექსიკა'],[/^J/,'იაპონია'],[/^K[L-R]/,'სამხრეთ კორეა'],[/^L/,'ჩინეთი'],[/^M[A-E]/,'ინდოეთი'],[/^MR|^ML|^MM|^MN|^MP/,'ტაილანდი'],[/^NM|^NL/,'თურქეთი'],[/^S[A-M]/,'დიდი ბრიტანეთი'],[/^TM|^TN/,'ჩეხეთი'],[/^TR|^TS/,'უნგრეთი'],[/^U[U-Z]|^UU/,'რუმინეთი'],[/^U5|^U6/,'სლოვაკეთი'],[/^V[F-R]/,'საფრანგეთი'],[/^V[S-W]/,'ესპანეთი'],[/^W/,'გერმანია'],[/^X[S-W]|^X[3-9]|^XT|^Z8|^X7/,'რუსეთი'],[/^Y[S-W]/,'შვედეთი'],[/^YV/,'შვედეთი'],[/^Z[A-R]/,'იტალია'],[/^9[A-E]/,'ბრაზილია'],[/^8A/,'არგენტინა'],[/^7[A-E]/,'ახალი ზელანდია'],[/^6/,'ავსტრალია']];
+// Japanese domestic chassis numbers (no 17-char VIN), common on cars imported from Japan.
+const JP_FRAME=[['NHW20','Toyota','Prius'],['NHW11','Toyota','Prius'],['ZVW30','Toyota','Prius'],['ZVW35','Toyota','Prius'],['ZVW50','Toyota','Prius'],['ZVW51','Toyota','Prius'],['ZVW55','Toyota','Prius'],['ZVW52','Toyota','Prius Prime'],['ZVW40','Toyota','Prius V'],['ZVW41','Toyota','Prius V'],['NHP10','Toyota','Aqua'],['MXPK1','Toyota','Aqua'],['NHP130','Toyota','Vitz'],['KSP130','Toyota','Vitz'],['NSP130','Toyota','Vitz'],['NCP1','Toyota','Vitz'],['NCP9','Toyota','Vitz'],['NZE1','Toyota','Corolla'],['ZRE1','Toyota','Corolla'],['NRE1','Toyota','Corolla'],['ZWE21','Toyota','Corolla'],['NKE165','Toyota','Corolla'],['AVV50','Toyota','Camry'],['ACV4','Toyota','Camry'],['AXVH7','Toyota','Camry'],['ACA3','Toyota','RAV4'],['ACA2','Toyota','RAV4'],['ZSA4','Toyota','RAV4'],['AXAH5','Toyota','RAV4'],['ZNE1','Toyota','Wish'],['ZGE2','Toyota','Wish'],['ANH2','Toyota','Alphard'],['GGH2','Toyota','Alphard'],['ATH20','Toyota','Alphard'],['AYH30','Toyota','Alphard'],['AGH3','Toyota','Alphard'],['ACU30','Toyota','Harrier'],['MHU38','Toyota','Harrier'],['AVU65','Toyota','Harrier'],['ZSU6','Toyota','Harrier'],['GRS18','Toyota','Crown'],['GRS20','Toyota','Crown'],['AWS21','Toyota','Crown'],['GRX1','Toyota','Mark X'],['ACR50','Toyota','Estima'],['AHR20','Toyota','Estima'],['ZRR7','Toyota','Noah'],['ZWR80','Toyota','Voxy'],['ZRR80','Toyota','Voxy'],['NCP6','Toyota','Ist'],['ZSP110','Toyota','Ist'],['UZJ200','Toyota','Land Cruiser'],['URJ20','Toyota','Land Cruiser'],['GRJ15','Toyota','Land Cruiser Prado'],['TRJ15','Toyota','Land Cruiser Prado'],
+ ['GP1','Honda','Fit'],['GP5','Honda','Fit'],['GP6','Honda','Fit'],['GK3','Honda','Fit'],['GK5','Honda','Fit'],['GE6','Honda','Fit'],['GE8','Honda','Fit'],['GR3','Honda','Fit'],['RU1','Honda','Vezel'],['RU3','Honda','Vezel'],['RU4','Honda','Vezel'],['ZE2','Honda','Insight'],['ZE3','Honda','Insight'],['GB3','Honda','Freed'],['GB5','Honda','Freed'],['GB7','Honda','Freed'],['RK5','Honda','Stepwgn'],['RP3','Honda','Stepwgn'],['RD1','Honda','CR-V'],['RE4','Honda','CR-V'],
+ ['ZE0','Nissan','Leaf'],['AZE0','Nissan','Leaf'],['ZE1','Nissan','Leaf'],['E12','Nissan','Note'],['HE12','Nissan','Note'],['NE12','Nissan','Note'],['E11','Nissan','Note'],['T31','Nissan','X-Trail'],['NT31','Nissan','X-Trail'],['T32','Nissan','X-Trail'],['NT32','Nissan','X-Trail'],['YF15','Nissan','Juke'],['C11','Nissan','Tiida'],
+ ['DE3','Mazda','Demio'],['DE5','Mazda','Demio'],['DJ3','Mazda','Demio'],['DJ5','Mazda','Demio'],['KE2','Mazda','CX-5'],['KE5','Mazda','CX-5'],['KF2','Mazda','CX-5'],['BM5','Mazda','Mazda3'],['BL5','Mazda','Mazda3'],
+ ['SH5','Subaru','Forester'],['SJ5','Subaru','Forester'],['SJG','Subaru','Forester'],['SK9','Subaru','Forester'],['BR9','Subaru','Outback'],['BS9','Subaru','Outback'],['GP7','Subaru','XV'],['GT7','Subaru','XV'],['GH8','Subaru','Impreza'],['GP2','Subaru','Impreza'],
+ ['CW5W','Mitsubishi','Outlander'],['GF7W','Mitsubishi','Outlander'],['GG2W','Mitsubishi','Outlander'],['V9','Mitsubishi','Montero / Pajero'],['V8','Mitsubishi','Montero / Pajero'],['CY4A','Mitsubishi','Lancer'],['CV5W','Mitsubishi','Delica']
+].sort((a,b)=>b[0].length-a[0].length);
+
+const YC='ABCDEFGHJKLMNPRSTVWXY123456789';
+function vinYear(v,na){
+  const c=v[9],i=YC.indexOf(c);if(i<0)return null;
+  const base=1980+i; // A=1980 … Y=2000, 1=2001 … 9=2009 (the same code repeats every 30 years)
+  const max=new Date().getFullYear()+1;
+  if(na){
+    // North-American rule: a letter in position 7 means the 2010–2039 cycle, a digit means 1980–2009.
+    let y=/[A-Z]/.test(v[6])?base+30:base;
+    if(y>max)y=base; // never a future year
+    return {y,sure:true};
+  }
+  const cands=[base,base+30].filter(y=>y<=max);
+  return cands.length?{y:Math.max(...cands),sure:false}:null;
+}
+function vinCheck(v){
+  const tr={A:1,B:2,C:3,D:4,E:5,F:6,G:7,H:8,J:1,K:2,L:3,M:4,N:5,P:7,R:9,S:2,T:3,U:4,V:5,W:6,X:7,Y:8,Z:9},w=[8,7,6,5,4,3,2,10,0,9,8,7,6,5,4,3,2];
+  let s=0;for(let i=0;i<17;i++){const ch=v[i];s+=(/\d/.test(ch)?+ch:tr[ch])*w[i]}
+  const r=s%11;return (r===10?'X':String(r))===v[8];
+}
+// Position-based model codes used by several makers on every VIN.
+const TOYOTA_P8={E:'Corolla',K:'Camry',U:'Prius',P:'Prius Prime',V:'RAV4',H:'Highlander',C:'Sienna',J:'Land Cruiser',R:'4Runner',N:'Tacoma',X:'C-HR',F:'FJ Cruiser',B:'Avalon',1:'Tundra',3:'Yaris',D:'Yaris',G:'Venza'};
+const LEXUS_P8={A:'RX',Z:'NX',G:'ES',L:'GS',H:'CT',2:'IS',5:'IS',X:'GX',Y:'UX',T:'LS',U:'LS',K:'RC',W:'LC'};
+const HONDA_45={CM:'Accord',CP:'Accord',CR:'Accord',CV:'Accord',CG:'Accord',CD:'Accord',CS:'Accord',CT:'Accord',CU:'Accord',CW:'Accord',CY:'Accord',FA:'Civic',FB:'Civic',FC:'Civic',FD:'Civic',FE:'Civic',FG:'Civic',FK:'Civic',FL:'Civic',ES:'Civic',EM:'Civic',EJ:'Civic',EN:'Civic',RE:'CR-V',RM:'CR-V',RW:'CR-V',RS:'CR-V',RT:'CR-V',RD:'CR-V',RL:'Odyssey',YF:'Pilot',YH:'Pilot',GD:'Fit',GE:'Fit',GK:'Fit',ZE:'Insight',ZF:'CR-Z',RU:'HR-V',YK:'Ridgeline',TF:'Crosstour',YH1:'Element'};
+const NISSAN_45={AL:'Altima',BL:'Altima',CL:'Altima',AB:'Sentra',BB:'Sentra',CB:'Sentra',CN:'Versa',BC:'Versa',CE:'Versa',CC:'Versa',AT:'Rogue',BT:'Rogue',AS:'Rogue',AJ:'Rogue',AR:'Pathfinder',DR:'Pathfinder',AA:'Maxima',BA:'Maxima',AF:'Juke',AY:'Armada',CP:'Kicks',DP:'Kicks',AZ:'Murano',BZ:'Murano'};
+const HYUNDAI_4={D:'Elantra',E:'Sonata',C:'Accent',T:'Veloster',G:'Genesis',F:'Azera',H:'Genesis',J:'Tucson',S:'Santa Fe',K:'Kona',R:'Palisade',M:'Santa Fe',P:'Santa Fe',B:'i30',U:'Elantra'};
+const KIA_4={G:'Optima',F:'Forte',D:'Rio',J:'Soul',P:'Sportage',K:'Sorento',M:'Carnival',C:'Niro',E:'Seltos',A:'Picanto',B:'Picanto'};
+const SUBARU_45={SH:'Forester',SJ:'Forester',SK:'Forester',SL:'Forester',SG:'Forester',BR:'Outback',BS:'Outback',BT:'Outback',BP:'Outback',BH:'Outback',BN:'Legacy',BM:'Legacy',BW:'Legacy',BL:'Legacy',BE:'Legacy',GP:'Impreza',GJ:'Impreza',GE:'Impreza',GH:'Impreza',GT:'Impreza',GD:'Impreza',GK:'Impreza',GV:'WRX',VA:'WRX',VB:'WRX',WM:'Ascent',WX:'Tribeca',ZC:'BRZ',ZD:'BRZ'};
+const MAZDA_45={BL:'Mazda3',BM:'Mazda3',BN:'Mazda3',BP:'Mazda3',BK:'Mazda3',GJ:'Mazda6',GL:'Mazda6',GG:'Mazda6',GH:'Mazda6',KE:'CX-5',KF:'CX-5',KJ:'CX-5',TB:'CX-9',TC:'CX-9',DK:'CX-3',DM:'CX-30',ER:'CX-7',NA:'MX-5',NB:'MX-5',NC:'MX-5',ND:'MX-5',CR:'Mazda5',CW:'Mazda5',DE:'Mazda2',DJ:'Mazda2'};
+// When nothing more specific matches: the model a given plant/WMI builds most often for this market.
+const POP_MODEL={'Toyota':'Camry','Lexus':'RX','Mercedes-Benz':'C-Class','BMW':'3 Series','Hyundai':'Elantra','Kia':'Optima','Volkswagen':'Jetta','Ford':'Fusion','Nissan':'Altima','Honda':'Civic','Subaru':'Forester','Mitsubishi':'Outlander','Mazda':'Mazda3','Chevrolet':'Malibu','Opel':'Astra','Audi':'A4','Porsche':'Cayenne','Land Rover':'Range Rover Sport','Jeep':'Grand Cherokee','Dodge':'Charger','Chrysler':'300','Infiniti':'Q50','Acura':'MDX','Tesla':'Model 3','Volvo':'XC90','Mini':'Cooper','Lincoln':'MKZ','Buick':'Encore','Cadillac':'Escalade','GMC':'Terrain','Ram':'1500','Fiat':'500','Suzuki':'Grand Vitara','Skoda':'Octavia','Peugeot':'308','Renault':'Megane','Lada (VAZ)':'Priora','Daewoo':'Lacetti','Jaguar':'XF','Genesis':'G80'};
+const WMI_DEFAULT={'2T1':'Corolla','5YF':'Corolla','1NX':'Corolla','2T3':'RAV4','4T3':'Venza','3TM':'Tacoma','2T2':'RX','58A':'ES','5J6':'CR-V','2HK':'CR-V','2HG':'Civic','19X':'Civic','3CZ':'HR-V','4S4':'Outback','4S3':'Legacy','3FA':'Fusion','1ZV':'Mustang','3VV':'Tiguan','1V2':'Atlas','55S':'C-Class','WD3':'Sprinter','WD4':'Sprinter','KNM':'Rogue','1N6':'Frontier','3MV':'CX-30','ML3':'Mirage','4A4':'Outlander Sport','KL8':'Spark','7SA':'Model Y'};
+// Opel / Vauxhall. Older VINs: W0L0 + platform code (pos 5–7) + body code (pos 8–9, 75 = MPV).
+function opelModel(v){
+  const body=v.slice(7,9);
+  if(v[3]==='0'){
+    const pl=v.slice(4,7),p2=pl.slice(0,2);
+    if(p2==='TG')return body==='75'?'Zafira':'Astra';
+    if(p2==='AH')return (pl==='AHM'||body==='75')?'Zafira':'Astra';
+    if(p2==='ZC')return pl==='ZCZ'?'Signum':'Vectra';
+    if(p2==='JB'||p2==='JC')return 'Vectra';
+    if(p2==='XC')return body==='75'?'Meriva':(pl==='XCC'?'Combo':'Corsa');
+    if(p2==='SD'||p2==='SB'||p2==='SC')return 'Corsa';
+    if(p2==='VB'||p2==='VA')return 'Omega';
+    if(p2==='GS'||p2==='GT'||p2==='GM')return 'Insignia';
+    if(p2==='LH'||p2==='CH')return 'Antara';
+    if(p2==='UB'||p2==='UE')return 'Frontera';
+    return null;
+  }
+  const p2=v.slice(3,5);
+  const m={PD:'Astra',PE:'Astra',PF:'Astra',PC:'Astra',BF:'Astra',BD:'Astra',BC:'Astra',BE:'Astra',GM:'Insignia',GS:'Insignia',GT:'Insignia',GX:'Insignia',ZF:'Insignia',SH:'Meriva',SC:'Meriva',JD:'Mokka',JC:'Mokka',UJ:'Mokka',SD:'Corsa',SE:'Corsa',SX:'Corsa',UK:'Corsa',LH:'Antara',CH:'Antara',PG:'Zafira',PH:'Zafira',PJ:'Zafira',ZD:'Zafira',ZE:'Crossland',ZG:'Grandland',YW:'Grandland',FJ:'Vivaro',JG:'Vivaro',EG:'Combo'};
+  if((p2==='PD'||p2==='PE'||p2==='PF')&&v[5]==='9')return 'Zafira'; // Zafira Tourer shares the Astra J platform, body code 9
+  return m[p2]||null;
+}
+function vinModel(make,v){
+  const p45=v.slice(3,5),p4=v[3],p8=v[7],w=v.slice(0,3);
+  if(make==='Mercedes-Benz'){
+    if(/^\d{3}/.test(v.slice(3,6)))return MB_EU[v.slice(3,6)]||null;
+    return MB_US[v.slice(3,5)]||null;
+  }
+  if(VAG78[make])return VAG78[make][v.slice(6,8)]||null;
+  for(const[re,m]of (VDS[make]||[]))if(re.test(v))return m;
+  if(make==='Toyota'){
+    if(p8==='1'&&w==='5TD')return 'Sequoia';
+    if(p8==='3'&&/^JTDKDT/.test(v))return 'Prius C';
+    if(p8==='U'&&p45==='ZN')return 'Prius V';
+    if(p8==='E'&&p4==='K'&&w==='2T1')return 'Matrix';
+    if(w==='4T3')return 'Venza';
+    return TOYOTA_P8[p8]||null;
+  }
+  if(make==='Lexus'){
+    if(p8==='X')return /^(HY|DY|BY|HW)/.test(p45)?'LX':'GX';
+    return LEXUS_P8[p8]||null;
+  }
+  if(make==='Honda'||make==='Acura')return make==='Honda'?(HONDA_45[p45]||null):null;
+  if(make==='Nissan'){if(p45==='AZ'&&w==='1N4')return 'Leaf';return NISSAN_45[p45]||null}
+  if(make==='Hyundai'){if(p4==='L')return /[0-9]/.test(v[4])?'Sonata':'Elantra';return HYUNDAI_4[p4]||null}
+  if(make==='Kia'){if(p4==='P'&&/[0-9]/.test(v[4]))return 'Telluride';return KIA_4[p4]||null}
+  if(make==='Subaru'){if(w==='JF2'&&(p45==='GP'||p45==='GT'))return 'Crosstrek';return SUBARU_45[p45]||null}
+  if(make==='Mazda')return MAZDA_45[p45]||null;
+  if(make==='Opel')return opelModel(v);
+  return null;
+}
+function decodeVin(raw){
+  const v=raw.toUpperCase().replace(/[\s\-–.]/g,'');
+  if(!v)return {err:'შეიყვანე VIN კოდი.'};
+  // Japanese chassis number, e.g. ZVW30-1234567
+  const rj=raw.toUpperCase().trim();
+  const jp=rj.match(/^([A-Z]{1,5}\d{1,3}[A-Z]?)[\s\-–]+(\d{5,8})$/)||rj.replace(/\s/g,'').match(/^([A-Z]{1,5}\d{1,3}[A-Z]?)(\d{6,8})$/);
+  if(jp&&v.length<17){
+    const hit=JP_FRAME.find(([k])=>jp[1].startsWith(k));
+    if(hit)return {make:hit[1],model:hit[2],jp:true,code:jp[1]};
+    return {err:`„${jp[1]}“ იაპონური ძარის ნომერს ჰგავს, მაგრამ მოდელი ვერ დადგინდა. აირჩიე მარკა და მოდელი ხელით ან დაგვირეკე.`};
+  }
+  if(v.length!==17)return {err:`VIN უნდა იყოს 17 სიმბოლო. შეყვანილია ${v.length}.`};
+  const bad=[...v].map((c,i)=>/[IOQ]/.test(c)?`${i+1}-ე პოზიციაზე „${c}“`:null).filter(Boolean);
+  if(bad.length)return {err:`VIN-ში ასოები I, O და Q არ გამოიყენება (${bad.join(', ')}). სავარაუდოდ იგულისხმება 1 ან 0.`};
+  if(/[^A-HJ-NPR-Z0-9]/.test(v))return {err:'VIN შეიძლება შეიცავდეს მხოლოდ ლათინურ ასოებს და ციფრებს.'};
+  let make=WMI[v.slice(0,3)]||WMI[v.slice(0,2)]||null;
+  let model=null;
+  if(SHARED[v.slice(0,3)]){for(const mk of SHARED[v.slice(0,3)]){const m=vinModel(mk,v);if(m){make=mk;model=m;break}}}
+  if(make&&!model)model=vinModel(make,v);
+  let guess=false;
+  if(make&&!model&&WMI_DEFAULT[v.slice(0,3)]&&(MAKES[make]||[]).includes(WMI_DEFAULT[v.slice(0,3)])){model=WMI_DEFAULT[v.slice(0,3)];guess=true}
+  const check=vinCheck(v);
+  const na=/^[1-5]/.test(v)||check; // North-American standard VIN (also used on US-market cars built in Asia/Europe)
+  // European Mercedes/BMW/Opel VINs do not encode the model year in position 10.
+  const yr=(!na&&['Mercedes-Benz','BMW','Mini','Smart'].includes(make))?null:vinYear(v,na);
+  const country=(COUNTRY.find(([re])=>re.test(v))||[0,null])[1];
+  const naOrigin=/^[1-5]/.test(v);
+    // Kia renamed Optima to K5 from the 2021 model year.
+  if(make==='Kia'&&model==='Optima'&&yr&&yr.y>=2021)model='K5';
+  return {v,make,model,guess,yr,country,na,naOrigin,check};
+}
+function renderVin(r){
+  const box=$('#vinMsg');box.hidden=false;
+  if(r.err){box.innerHTML=`<p class="vin-err">${esc(r.err)}</p>`;return}
+  const row=(k,val,cls='')=>`<dt>${k}</dt><dd class="${cls}">${val}</dd>`;
+  let h='<dl class="vin-res">';
+  if(r.jp){
+    h+=row('ძარის ნომერი',`<span class="mono">${esc(r.code)}</span> (იაპონია)`)+row('მარკა',esc(r.make))+row('მოდელი',esc(r.model));
+  }else{
+    h+=row('მარკა',r.make?esc(r.make):'<span class="muted">ვერ დადგინდა</span>');
+    h+=row('მოდელი',r.model?(r.guess?`${esc(r.model)} <span class="muted">(სავარაუდო, საჭიროების შემთხვევაში შეცვალე სიაში)</span>`:esc(r.model)):'<span style="color:var(--low)">VIN-ში მოდელი ვერ დადგინდა, აირჩიე სიიდან ↑</span>');
+    h+=row('წელი',r.yr?(r.yr.sure?r.yr.y:`${r.yr.y} <span class="muted">(სავარაუდო)</span>`):'<span class="muted">ვერ დადგინდა</span>');
+    if(r.online)h+=row('დეტალები',esc(r.online));
+    if(r.country)h+=row('წარმოება',esc(r.country));
+    if(r.check)h+=row('საკონტროლო ციფრი','<span style="color:var(--ok)">სწორია</span>');
+    else if(r.naOrigin)h+=row('საკონტროლო ციფრი','<span style="color:var(--out)">არ ემთხვევა, გადაამოწმე VIN</span>');
+  }
+  h+='</dl>';
+  if(!r.make)h+='<p class="note" style="margin:8px 0 0">მწარმოებელი ჩვენს ბაზაში ვერ მოიძებნა. აირჩიე მარკა ხელით ან დაგვირეკე.</p>';
+  box.innerHTML=h;
+  if(!r.make)return;
+  $('#pMake').value=MAKES[r.make]?r.make:'';setModels($('#pMake').value);
+  if(r.model&&[...$('#pModel').options].some(o=>o.value===r.model))$('#pModel').value=r.model;
+  if(r.yr)$('#pYear').value=String(r.yr.y);
+  const ms=$('#pModel');ms.classList.toggle('need',!r.model);if(!r.model)ms.focus();
+  state.make=r.make;state.model=r.model||null;state.year=r.yr?String(r.yr.y):null;state.shown=12;render();
+}
+// After the instant offline decode, ask the server (official NHTSA database) for the exact model.
+let vinSeq=0;
+async function vinOnline(r){
+  if(!r||r.err||r.jp||!r.v)return;
+  const seq=++vinSeq;
+  const box=$('#vinMsg');const note=document.createElement('p');note.className='note';note.style.margin='8px 0 0';note.textContent='ვამოწმებ ოფიციალურ VIN ბაზაში…';box.appendChild(note);
+  try{
+    const res=await fetch('/api/vin/'+r.v);if(!res.ok)throw 0;const d=await res.json();if(seq!==vinSeq)return;
+    note.remove();
+    if(!d.model&&!d.make)return;
+    const make=Object.keys(MAKES).find(m=>m.toLowerCase()===String(d.make).toLowerCase())||r.make||d.make;
+    const list=MAKES[make]||[];
+    let model=list.find(m=>m.toLowerCase()===String(d.model).toLowerCase())||list.find(m=>String(d.model).toLowerCase().startsWith(m.toLowerCase()))||d.model||r.model;
+    const year=/^\d{4}$/.test(d.year)?{y:+d.year,sure:true}:r.yr;
+    const extra=[d.trim,d.body,d.engine].filter(Boolean).join(' · ');
+    renderVin({...r,make,model,guess:false,yr:year,online:extra});
+    if(model&&!list.includes(model)){const o=document.createElement('option');o.textContent=model;$('#pModel').appendChild(o);$('#pModel').value=model;$('#pModel').classList.remove('need')}
+  }catch(e){note.remove()}
+}
+$('#vinGo').addEventListener('click',()=>{const r=decodeVin($('#vin').value);renderVin(r);vinOnline(r)});
+$('#vin').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();const r=decodeVin($('#vin').value);renderVin(r);vinOnline(r)}});
+
+/* rail */
+function renderRail(){
+  const brands=[...new Set(P.map(p=>p.brand))].sort();
+  $('#fBrands').innerHTML=brands.map(b=>`<label><input type="checkbox" value="${esc(b)}" ${state.brands.has(b)?'checked':''}> ${esc(b)}<span class="n">${P.filter(p=>p.brand===b).length}</span></label>`).join('');
+  $('#fBranch').innerHTML=BRANCHES.map(b=>`<label><input type="checkbox" value="${b.id}" ${state.branch.has(b.id)?'checked':''}> ${b.name}</label>`).join('');
+}
+$('#fBrands').addEventListener('change',e=>{const v=e.target.value;e.target.checked?state.brands.add(v):state.brands.delete(v);state.shown=12;render()});
+$('#fBranch').addEventListener('change',e=>{const v=e.target.value;e.target.checked?state.branch.add(v):state.branch.delete(v);state.shown=12;render()});
+$('#pMin').addEventListener('input',e=>{state.min=e.target.value===''?null:+e.target.value;render()});
+$('#pMax').addEventListener('input',e=>{state.max=e.target.value===''?null:+e.target.value;render()});
+$('#fStock').addEventListener('change',e=>{state.stock=e.target.checked;render()});
+$('#fSale').addEventListener('change',e=>{state.sale=e.target.checked;render()});
+$('#sort').addEventListener('change',e=>{state.sort=e.target.value;render()});
+$('#q').addEventListener('input',e=>{state.q=e.target.value.trim();state.shown=12;render()});
+$('#q').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('catalog').scrollIntoView()});
+$('#railToggle').addEventListener('click',()=>{const r=$('#rail'),c=r.dataset.collapsed==='true';r.dataset.collapsed=String(!c);$('#railToggle').setAttribute('aria-expanded',String(c));$('#railToggle span').textContent=c?'−':'+'});
+function resetAll(){Object.assign(state,{q:'',cat:null,brands:new Set(),branch:new Set(),min:null,max:null,stock:false,sale:false,make:null,model:null,year:null,shown:12});$('#q').value='';$('#pMin').value='';$('#pMax').value='';$('#fStock').checked=false;$('#fSale').checked=false;$('#pMake').value='';$('#pMake').dispatchEvent(new Event('change'));$('#pYear').value='';renderCats();renderRail();render()}
+$('#reset').addEventListener('click',resetAll);
+
+function filtered(){
+  const q=state.q.toLowerCase().replace(/\s+/g,'');
+  let r=P.filter(p=>{
+    if(state.cat&&p.cat!==state.cat)return false;
+    if(state.make&&p.fits[0]!=='*'&&!p.fits.includes(state.make))return false;
+    if(state.brands.size&&!state.brands.has(p.brand))return false;
+    if(state.min!=null&&p.price<state.min)return false;
+    if(state.max!=null&&p.price>state.max)return false;
+    if(state.sale&&!p.old)return false;
+    const br=state.branch.size?[...state.branch]:BIDS;
+    if(state.stock&&!br.some(b=>p.stock[b]>0))return false;
+    if(state.branch.size&&!br.some(b=>p.stock[b]>0))return false;
+    if(q){const hay=(p.name+p.brand+p.oem+CATS.find(c=>c.id===p.cat).name+p.fits.join('')).toLowerCase().replace(/\s+/g,'');if(!hay.includes(q))return false}
+    return true;
+  });
+  const s={pop:(a,b)=>b.pop-a.pop,asc:(a,b)=>a.price-b.price,desc:(a,b)=>b.price-a.price,name:(a,b)=>a.name.localeCompare(b.name,'ka')}[state.sort];
+  return r.sort(s);
+}
+function stockLine(p){
+  const br=state.branch.size?[...state.branch]:BIDS;
+  const n=br.reduce((a,b)=>a+(p.stock[b]||0),0);
+  const where=br.filter(b=>p.stock[b]>0).length;
+  if(n===0)return `<span class="stock"><span class="dot out"></span>შეკვეთით, 3–5 დღე</span>`;
+  if(n<=4)return `<span class="stock"><span class="dot low"></span>მცირე მარაგი · ${where} ფილიალში</span>`;
+  return `<span class="stock"><span class="dot ok"></span>მარაგშია · ${where} ფილიალში</span>`;
+}
+function card(p){
+  const disc=p.old?Math.round((1-p.price/p.old)*100):0;
+  return `<article class="card">
+    <button class="pic" data-open="${p.id}" aria-label="${esc(p.name)} — დეტალები">${disc?`<span class="badge">−${disc}%</span>`:''}${p.image?`<img src="${esc(p.image)}" alt="" loading="lazy">`:ICONS[p.cat]}</button>
+    <div class="body">
+      <div class="brand"><b>${esc(p.brand)}</b><span class="mono">${esc(p.oem)}</span></div>
+      <h3 data-open="${p.id}">${esc(p.name)}</h3>
+      <div class="fits">${esc(fitsTxt(p))}</div>
+      ${stockLine(p)}
+      <div class="foot">
+        <div class="price">${p.old?`<s>${gel(p.old)} ₾</s>`:''}${gel(p.price)} <small>₾</small></div>
+        <button class="btn add" data-add="${p.id}">კალათაში</button>
+      </div>
+    </div></article>`;
+}
+function renderChips(){
+  const c=[];
+  if(state.make)c.push(['make',`${state.make}${state.model?' '+state.model:''}${state.year?' · '+state.year:''}`]);
+  if(state.cat)c.push(['cat',CATS.find(x=>x.id===state.cat).name]);
+  if(state.q)c.push(['q',`„${state.q}“`]);
+  state.brands.forEach(b=>c.push(['brand:'+b,b]));
+  state.branch.forEach(b=>c.push(['branch:'+b,BRANCHES.find(x=>x.id===b).name]));
+  if(state.min!=null||state.max!=null)c.push(['price',`${state.min??0}–${state.max??'∞'} ₾`]);
+  if(state.stock)c.push(['stock','მარაგში']);
+  if(state.sale)c.push(['sale','ფასდაკლება']);
+  $('#chips').innerHTML=c.map(([k,t])=>`<span class="chip">${esc(t)}<button data-chip="${esc(k)}" aria-label="მოხსნა">×</button></span>`).join('');
+}
+$('#chips').addEventListener('click',e=>{
+  const k=e.target.dataset.chip;if(!k)return;
+  if(k==='make'){state.make=state.model=state.year=null;$('#pMake').value='';$('#pMake').dispatchEvent(new Event('change'));$('#pYear').value=''}
+  else if(k==='cat'){state.cat=null;renderCats()}
+  else if(k==='q'){state.q='';$('#q').value=''}
+  else if(k.startsWith('brand:')){state.brands.delete(k.slice(6));renderRail()}
+  else if(k.startsWith('branch:')){state.branch.delete(k.slice(7));renderRail()}
+  else if(k==='price'){state.min=state.max=null;$('#pMin').value='';$('#pMax').value=''}
+  else if(k==='stock'){state.stock=false;$('#fStock').checked=false}
+  else if(k==='sale'){state.sale=false;$('#fSale').checked=false}
+  render();
+});
+function render(){
+  const r=filtered();
+  $('#found').textContent=`ნაპოვნია ${r.length} პროდუქტი`;
+  renderChips();
+  $('#grid').innerHTML=r.length?r.slice(0,state.shown).map(card).join(''):`<div class="empty"><b style="color:var(--fg)">ამ ფილტრებით ნაწილი ვერ მოიძებნა</b><br>შეცვალე ფილტრები ან <a href="#contact">მოგვწერე</a>, მოგიძიებთ შეკვეთით.</div>`;
+  $('#moreBtn').hidden=r.length<=state.shown;
+}
+$('#moreBtn').addEventListener('click',()=>{state.shown+=12;render()});
+document.addEventListener('click',e=>{
+  const a=e.target.closest('[data-add]');if(a){addToCart(+a.dataset.add);return}
+  const o=e.target.closest('[data-open]');if(o){openModal(+o.dataset.open)}
+});
+
+/* modal */
+function openModal(id){
+  const p=P.find(x=>x.id===id),c=CATS.find(x=>x.id===p.cat);
+  $('#modal').innerHTML=`<div class="mgrid"><div class="mpic">${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name)}">`:ICONS[p.cat]}</div><div class="minfo">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px"><div class="eyebrow">${c.name}</div><button class="x" data-close aria-label="დახურვა">×</button></div>
+    <h3>${esc(p.brand)} · ${esc(p.name)}</h3>
+    <dl class="specs"><dt>OEM / კოდი</dt><dd class="mono">${esc(p.oem)}</dd><dt>თავსებადობა</dt><dd>${esc(fitsTxt(p))}</dd>${Object.entries(p.specs).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}<dt>გარანტია</dt><dd>12 თვე</dd></dl>
+    <div><h4 class="eyebrow" style="margin:6px 0 8px;color:var(--muted)">მარაგი ფილიალებში</h4><div class="bstock">${BRANCHES.map(b=>{const n=p.stock[b.id];return `<div><span class="dot ${n===0?'out':n<=2?'low':'ok'}"></span>${b.name}<span class="q">${n?n+' ც.':'არ არის'}</span></div>`}).join('')}</div></div>
+    <div class="foot" style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px"><div class="price">${p.old?`<s>${gel(p.old)} ₾</s>`:''}${gel(p.price)} <small>₾</small></div><button class="btn" data-add="${p.id}">კალათაში დამატება</button></div>
+  </div></div>`;
+  $('#modal').hidden=false;$('#scrim').hidden=false;$('#modal').querySelector('[data-close]').focus();
+}
+function closeAll(){$('#modal').hidden=true;$('#drawer').hidden=true;$('#scrim').hidden=true}
+$('#scrim').addEventListener('click',closeAll);
+$('#modal').addEventListener('click',e=>{if(e.target.closest('[data-close]'))closeAll()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+
+/* cart */
+function saveCart(){store.set('bm-cart',cart);const n=Object.values(cart).reduce((a,b)=>a+b,0);$('#cartCount').textContent=n}
+function addToCart(id){cart[id]=(cart[id]||0)+1;saveCart();if(!$('#drawer').hidden)renderCart();toast('დაემატა კალათაში')}
+function openCart(){$('#modal').hidden=true;renderCart();$('#drawer').hidden=false;$('#scrim').hidden=false}
+$('#openCart').addEventListener('click',openCart);
+$('#closeCart').addEventListener('click',closeAll);
+function pruneCart(){for(const id of Object.keys(cart))if(!P.find(p=>p.id==id))delete cart[id]}
+function cartSum(){return Object.entries(cart).reduce((a,[id,q])=>{const p=P.find(p=>p.id==id);return a+(p?p.price*q:0)},0)}
+function renderCart(){
+  $('#dTitle').textContent='კალათა';
+  const ids=Object.keys(cart);
+  if(!ids.length){$('#dbody').innerHTML=`<div class="empty" style="margin-top:20px">კალათა ცარიელია.<br><a href="#catalog" data-close-cart>კატალოგში გადასვლა</a></div>`;$('#dfoot').innerHTML='';return}
+  $('#dbody').innerHTML=ids.map(id=>{const p=P.find(x=>x.id==id),q=cart[id];return `<div class="line"><div class="th">${p.image?`<img src="${esc(p.image)}" alt="">`:ICONS[p.cat]}</div><div style="min-width:0"><div class="nm">${esc(p.brand)} · ${esc(p.name)}<small class="mono">${esc(p.oem)}</small></div><div class="qty"><button data-dec="${id}" aria-label="შემცირება">−</button><span>${q}</span><button data-inc="${id}" aria-label="გაზრდა">+</button></div></div><div class="lp">${gel(p.price*q)} ₾<button data-rm="${id}">წაშლა</button></div></div>`}).join('');
+  const sub=cartSum(),del=mode==='delivery'?(sub>=SET.freeDeliveryFrom?0:SET.deliveryFee):0;
+  $('#dfoot').innerHTML=`
+    <div class="seg"><button data-mode="pickup" aria-pressed="${mode==='pickup'}">ფილიალიდან გატანა</button><button data-mode="delivery" aria-pressed="${mode==='delivery'}">მიწოდება</button></div>
+    <div class="field"><label for="oBranch">${mode==='pickup'?'ფილიალი':'მისამართი'}</label>${mode==='pickup'?`<select id="oBranch">${BRANCHES.map(b=>`<option value="${b.id}">${b.name} — ${b.addr}</option>`).join('')}</select>`:`<input id="oBranch" placeholder="ქუჩა, სახლი, ქალაქი" autocomplete="street-address">`}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div class="field"><label for="oName">სახელი</label><input id="oName" autocomplete="name"></div><div class="field"><label for="oPhone">ტელეფონი</label><input id="oPhone" inputmode="tel" placeholder="5XX XX XX XX" autocomplete="tel"></div></div>
+    <div class="sum"><span>პროდუქტები</span><span>${gel(sub)} ₾</span></div>
+    ${mode==='delivery'?`<div class="sum"><span>მიწოდება${sub>=SET.freeDeliveryFrom?' (უფასო '+SET.freeDeliveryFrom+' ₾-დან)':''}</span><span>${gel(del)} ₾</span></div>`:''}
+    <div class="sum total"><span>სულ</span><span>${gel(sub+del)} ₾</span></div>
+    <div class="field"><label for="oComment">კომენტარი (არასავალდებულო)</label><input id="oComment" placeholder="მაგ. VIN, მანქანის მოდელი"></div>
+    <p class="note" id="oErr" hidden style="margin:0;color:var(--out)"></p>
+    <button class="btn" id="checkout" style="justify-content:center">შეკვეთის გაფორმება</button>`;
+}
+$('#drawer').addEventListener('click',e=>{
+  const t=e.target;
+  if(t.closest('[data-close-cart]')){closeAll();return}
+  if(t.dataset.inc){cart[t.dataset.inc]++;saveCart();renderCart()}
+  else if(t.dataset.dec){if(--cart[t.dataset.dec]<=0)delete cart[t.dataset.dec];saveCart();renderCart()}
+  else if(t.dataset.rm){delete cart[t.dataset.rm];saveCart();renderCart()}
+  else if(t.dataset.mode){mode=t.dataset.mode;renderCart()}
+  else if(t.id==='checkout')checkout();
+  else if(t.dataset.copy){copyText(t.dataset.copy,t)}
+});
+const phoneOk=s=>/^(\+?995)?\s*5\d{2}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{2}$/.test(s.trim())||/^(\+?995)?\s*\d{9}$/.test(s.replace(/[\s-]/g,''));
+async function checkout(){
+  const name=$('#oName').value.trim(),phone=$('#oPhone').value.trim(),where=$('#oBranch').value.trim(),err=$('#oErr'),btn=$('#checkout');
+  err.hidden=true;
+  if(!name){err.textContent='შეიყვანე სახელი.';err.hidden=false;$('#oName').focus();return}
+  if(!phoneOk(phone)){err.textContent='შეიყვანე ტელეფონი ფორმატით 5XX XX XX XX.';err.hidden=false;$('#oPhone').focus();return}
+  if(!where){err.textContent='მიუთითე მიწოდების მისამართი.';err.hidden=false;$('#oBranch').focus();return}
+  const body={name,phone,mode,comment:$('#oComment').value.trim(),items:Object.entries(cart).map(([id,qty])=>({id:+id,qty}))};
+  if(mode==='pickup')body.branch=where;else body.address=where;
+  btn.disabled=true;btn.textContent='იგზავნება…';
+  let res;
+  try{const r=await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});res=await r.json();if(!r.ok)throw new Error(res.error||'შეცდომა')}
+  catch(e){err.textContent=(e.message&&e.message!=='Failed to fetch')?e.message:'შეკვეთა ვერ გაიგზავნა. შეამოწმე ინტერნეტი ან დაგვირეკე.';err.hidden=false;btn.disabled=false;btn.textContent='შეკვეთის გაფორმება';return}
+  const br=mode==='pickup'?BRANCHES.find(b=>b.id===where):null;
+  cart={};saveCart();
+  $('#dTitle').textContent='შეკვეთა მიღებულია';
+  $('#dbody').innerHTML=`<div class="okmsg"><b>შეკვეთის ნომერი: <span class="mono" style="font-size:1em">${esc(res.id)}</span></b><br>მადლობა, ${esc(name)}! ჩვენი კონსულტანტი მალე დაგიკავშირდება ნომერზე ${esc(phone)} შეკვეთის დასადასტურებლად.<br>სულ გადასახდელი: <b>${gel(res.total)} ₾</b>${br?`<br>გატანა: ${esc(br.name)}, ${esc(br.addr)}`:''}</div>
+    <div class="cline"><div><small>კითხვების შემთხვევაში</small><span class="val">${esc(br?br.phone:SET.hotline)}</span></div><button class="copy" data-copy="${esc(br?br.phone:SET.hotline)}">კოპირება</button></div>`;
+  $('#dfoot').innerHTML=`<button class="btn ghost" data-close-cart style="justify-content:center">კატალოგში დაბრუნება</button>`;
+}
+function copyText(t,btn){
+  const done=()=>{const o=btn.textContent;btn.textContent='დაკოპირდა';setTimeout(()=>btn.textContent=o,1600)};
+  try{navigator.clipboard.writeText(t).then(done).catch(()=>toast('დააკოპირე ტექსტი ხელით'))}catch(e){toast('დააკოპირე ტექსტი ხელით')}
+}
+document.querySelectorAll('.cinfo .copy').forEach(b=>b.addEventListener('click',()=>copyText(b.dataset.copySet?(SET[b.dataset.copySet]||''):b.dataset.copy,b)));
+
+/* price table */
+function renderPrices(){
+  $('#ptable').innerHTML=CATS.map(c=>{const ps=P.filter(p=>p.cat===c.id);if(!ps.length)return '';const pr=ps.map(p=>p.price);const br=[...new Set(ps.map(p=>p.brand))].slice(0,5).join(', ');
+    return `<tr><td><b>${c.name}</b></td><td>${c.range}</td><td>${esc(br)}</td><td class="num">${gel(Math.min(...pr))} – ${gel(Math.max(...pr))}</td></tr>`}).join('');
+}
+
+/* branches */
+function tbilisiNow(){const d=new Date();const u=d.getTime()+d.getTimezoneOffset()*60000;return new Date(u+4*3600000)}
+function renderBranches(){
+  const now=tbilisiNow(),day=now.getDay(),h=now.getHours()+now.getMinutes()/60;
+  $('#branchList').innerHTML=BRANCHES.map(b=>{
+    const hrs=day===0?b.sun:b.wk;const open=hrs&&h>=hrs[0]&&h<hrs[1];
+    const st=open?`<span class="status" style="color:var(--ok)"><span class="dot ok"></span>ღიაა ${hrs[1]}:00-მდე</span>`:`<span class="status" style="color:var(--out)"><span class="dot out"></span>დაკეტილია</span>`;
+    const map='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(b.addr+', '+b.city+', Georgia');
+    return `<div class="branch"><div class="city">${b.city}</div><h3>${b.name}</h3>${st}
+      <dl><dt>მისამართი</dt><dd>${b.addr}</dd><dt>ორშ–შაბ</dt><dd>${b.wk[0]}:00 – ${b.wk[1]}:00</dd><dt>კვირა</dt><dd>${b.sun?b.sun[0]+':00 – '+b.sun[1]+':00':'დასვენება'}</dd><dt>ტელეფონი</dt><dd style="user-select:all">${b.phone}</dd></dl>
+      <div class="acts"><a class="btn" href="${map}" target="_blank" rel="noopener">რუკაზე</a><button class="btn ghost" data-copyp="${b.phone}">ნომრის კოპირება</button></div></div>`}).join('');
+}
+$('#branchList').addEventListener('click',e=>{const b=e.target.closest('[data-copyp]');if(b)copyText(b.dataset.copyp,b)});
+
+/* contact form */
+$('#cform').addEventListener('submit',async e=>{
+  e.preventDefault();const err=$('#cErr');err.style.color='var(--out)';
+  const n=$('#cName').value.trim(),ph=$('#cPhone').value.trim(),m=$('#cMsg').value.trim();
+  if(!n||!m){err.textContent='შეავსე სახელი და შეტყობინება.';err.hidden=false;return}
+  if(!phoneOk(ph)){err.textContent='ტელეფონი ფორმატით 5XX XX XX XX.';err.hidden=false;return}
+  err.hidden=true;const btn=e.target.querySelector('button[type=submit]');btn.disabled=true;
+  try{
+    const r=await fetch('/api/requests',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:n,phone:ph,car:$('#cCar').value,vin:$('#cVin').value,message:m})});
+    const j=await r.json();if(!r.ok)throw new Error(j.error);
+    const ok=$('#cOk');ok.hidden=false;ok.innerHTML=`მოთხოვნა <b class="mono" style="font-size:1em">${esc(j.id)}</b> მიღებულია. კონსულტანტი დაგიკავშირდება ნომერზე ${esc(ph)}.`;
+    e.target.reset();
+  }catch(x){err.textContent=x.message&&x.message!=='Failed to fetch'?x.message:'ვერ გაიგზავნა. დაგვირეკე ცხელ ხაზზე.';err.hidden=false}
+  btn.disabled=false;
+});
+
+/* menu */
+$('#menuBtn').addEventListener('click',()=>{const n=$('#nav');n.classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',n.classList.contains('open'))});
+$('#nav').addEventListener('click',e=>{if(e.target.tagName==='A')$('#nav').classList.remove('open')});
+
+function applySettings(){
+  document.querySelectorAll('[data-set]').forEach(el=>{const v=SET[el.dataset.set];if(v)el.textContent=v});
+  $('#brCount').textContent=BRANCHES.length;
+  $('#delivTxt').textContent=`ზუგდიდში ${gel(SET.deliveryFee)} ₾, ${gel(SET.freeDeliveryFrom)} ₾-დან უფასო.`;
+}
+async function loadCatalog(){
+  $('#grid').innerHTML='<div class="empty">კატალოგი იტვირთება…</div>';
+  try{
+    const r=await fetch('/api/catalog');if(!r.ok)throw 0;const d=await r.json();
+    P=d.products;BRANCHES=d.branches;BIDS=BRANCHES.map(b=>b.id);SET={...SET,...d.settings};
+  }catch(e){$('#grid').innerHTML='<div class="empty">კატალოგი ვერ ჩაიტვირთა. განაახლე გვერდი.</div>';return}
+  pruneCart();applySettings();renderCats();renderRail();render();renderPrices();renderBranches();saveCart();
+}
+initPicker();renderCats();saveCart();loadCatalog();
+setInterval(renderBranches,60000);
+</script>
+
+</body>
+</html>
